@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app-movies';
+  title = 'MovieReview';
+  description = 'Esto es una app que va a recoger las últimas películas que he visto.'
 }

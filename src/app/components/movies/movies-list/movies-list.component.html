@@ -1,3 +1,29 @@
-<h1 class="text-center pt-3">Explora tus películas</h1>
+<div class="background-page">
+    <div class="container">
+        <h1 class="text-center pt-3">Explora tus películas</h1>
 
-<p class="text-center lead">Listamos las películas que tenemos en nuestra base de datos en MYSQL.</p>
+        <p class="text-center lead">Listamos las películas que tenemos en nuestra base de datos en MYSQL.</p>
+
+        <!-- ESTE CONTENEDOR TIENE QUE RENDERIZAR UN LOADER CUANDO ESTEMOS PIDIENDO LA DATA AL BACKEND -->
+        <ng-container *ngIf="!movies">
+            <div>
+                <h4>Loading</h4>
+            </div>
+        </ng-container>
+
+        <div class="section d-flex justify-content-center flex-wrap gap-3 pt-4 pb-5">
+            <ng-container *ngFor="let movie of movies">
+                <div class="card shadow-sm" style="width: 18rem;">
+                    <!-- <img src="..." class="card-img-top" alt="..."> -->
+                    <div class="card-body">
+                        <h5 class="card-title">{{movie.title}}</h5>
+                        <p class="card-text">{{movie.summary}}</p>
+                        <br>
+                        <p class="card-text fs-6">{{movie.comment}}</p>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+    </div>
+</div>

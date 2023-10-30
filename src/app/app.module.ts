@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 import { NavModule } from './components/nav/nav.module';
 import { MoviesModule } from './components/movies/movies.module';
@@ -22,7 +23,8 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
     BrowserModule,
     AppRoutingModule,
     NavModule,
-    MoviesModule
+    MoviesModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

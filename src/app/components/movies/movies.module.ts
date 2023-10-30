@@ -10,6 +10,9 @@ import { MoviesListComponent } from './movies-list/movies-list.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    MoviesListComponent
   ]
 })
 export class MoviesModule { }

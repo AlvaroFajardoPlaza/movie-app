@@ -6,10 +6,18 @@
     width: 20rem;
 }
 
+.image-card-container {
+    height: 10rem;
+}
+
+.card-img-top {
+    object-fit: contain;
+}
+
 //Estas líneas de CSS nos permiten ocultar las parrafadas de texto y hacer las cards más pequeñas
 .card__preview-text {
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

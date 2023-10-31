@@ -4,4 +4,6 @@ export interface MOVIE {
     year: number,
     summary: string,
     comment: string,
-}
+    image: string,
+    tags: [Object],
+};

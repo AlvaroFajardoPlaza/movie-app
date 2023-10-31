@@ -13,17 +13,18 @@
 
         <div class="section d-flex justify-content-center flex-wrap gap-3 pt-4 pb-5">
             <ng-container *ngFor="let movie of movies">
-                <div class="card movieCard shadow-sm pt-3 ps-2 pe-2 pb-2">
-                    <!-- <img src="..." class="card-img-top" alt="..."> -->
-                    <div class="card-body">
+                <div class="card movieCard shadow-sm" (click)=MovieInfo(movie.id)>
+                    <img src={{movie.image}} class="card-img-top" alt="...">
+                    <div class="card-body mt-2">
                         <h4 class="card-title fw-bold">{{movie.title}}</h4>
+                        <h6 class="lead fs-6 text-green">{{movie.year}}</h6>
                         <br>
                         <p class="card-text card__preview-text fw-light">{{movie.summary}}</p>
                         <br>
                         <h6 class="card-title">Comment:</h6>
                         <p class="card-text card__preview-text fs-6 fw-light">{{movie.comment}}</p>
                         <br>
-                        <button class="btn btn-outline-dark rounded-pill">read more</button>
+                        <button class="btn btn-outline-dark rounded-pill" (click)=MovieInfo(movie.id)>read more</button>
                     </div>
                 </div>
             </ng-container>

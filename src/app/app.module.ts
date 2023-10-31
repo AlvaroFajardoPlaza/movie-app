@@ -11,6 +11,7 @@ import { PricingComponent } from './components/pricing/pricing.component';
 import { FeaturesComponent } from './components/features/features.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

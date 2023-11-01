@@ -1,9 +1,9 @@
-export interface MOVIE {
-    id: number,
-    title: string,
-    year: number,
-    summary: string,
-    comment: string,
-    image: string,
-    tags: [Object],
-};
+export interface Movie {
+  id: number;
+  title: string;
+  year: number;
+  summary: string;
+  comment: string;
+  image: string;
+  tags: Array<Object>;
+}

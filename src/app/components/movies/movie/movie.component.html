@@ -1,7 +1,11 @@
-<div class="container">
-    <h1>{{movie.title}}</h1>
-    <h6>{{movie.year}}</h6>
-    <p>{{movie.summary}}</p>
-    <p>{{movie.comment}}</p>
-  </div>
-  
+<div class="container" *ngIf="movie$ | async as movie">
+	<h1>{{ movie.title }}</h1>
+	<h6>{{ movie.year }}</h6>
+	<p>{{ movie.summary }}</p>
+	<p>{{ movie.comment }}</p>
+</div>
+
+<pre>{{ movie$ | async | json }}</pre>
+
+<!-- Esta previsualización no funciona porque le falta el async en la llamada. -->
+<pre>{{ movie$ | json }}</pre>

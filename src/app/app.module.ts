@@ -11,6 +11,14 @@ import { PricingComponent } from './components/pricing/pricing.component';
 import { FeaturesComponent } from './components/features/features.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 
+//Módulo para emplear lottiefiles
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
+
+// Export this function
+export function playerFactory(): any {  
+  return import('lottie-web');
+}
 
 @NgModule({
   declarations: [
@@ -26,6 +34,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
     NavModule,
     MoviesModule,
     HttpClientModule,
+    LottieModule.forRoot({ player: playerFactory }),
   ],
   providers: [],
   bootstrap: [AppComponent]

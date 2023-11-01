@@ -4,7 +4,6 @@ import { MoviesListComponent } from './movies-list/movies-list.component';
 import { MovieComponent } from './movie/movie.component';
 
 
-
 @NgModule({
   declarations: [
     MoviesListComponent,

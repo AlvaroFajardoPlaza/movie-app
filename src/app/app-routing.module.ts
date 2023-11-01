@@ -12,7 +12,7 @@ import { MovieComponent } from './components/movies/movie/movie.component';
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'explore-movies', component: MoviesListComponent},
-  {path: `explore-movies/:id`, component: MovieComponent},
+  {path: 'explore-movies/:id', component: MovieComponent},
   {path: 'pricing', component: PricingComponent},
   {path: 'features', component: FeaturesComponent},
   {path: 'about-us', component: AboutUsComponent}

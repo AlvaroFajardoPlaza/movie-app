@@ -1,16 +1,22 @@
-<div class="container">
-    
-    <h1 class="text-center pt-3">{{title}}</h1>
+        <div class="lottie-animation">
+           
+            <ng-lottie
+              [options]="options" 
+              class="lottie-background"
+              (animationCreated)="onAnimate($event)">
+            </ng-lottie>
 
-    <p class="lead text-center">{{description}}</p>
+            <h1 class="text-center pt-3 text-light">{{title}}</h1>
 
-    <br><br>
-    <p class="text-start pb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu mi a nibh rhoncus porttitor. Nam molestie velit erat, ac dignissim lectus congue vitae. Suspendisse a justo finibus, viverra leo nec, ornare diam. In aliquet blandit tellus, et porttitor ante laoreet a. Aenean pharetra velit eu mauris commodo porta. Aenean eget felis at dolor condimentum sodales rutrum rhoncus lorem. Integer a ligula et leo iaculis venenatis. Nunc aliquet consequat lacus, ac convallis ante hendrerit eget.
-    <br><br>
-    Aenean vestibulum mi ac urna feugiat euismod. Vivamus non elementum tortor, vitae commodo velit. Ut sit amet suscipit diam, non euismod tellus. Phasellus sagittis luctus consectetur. Fusce porttitor nisi non ante fermentum commodo id sit amet augue. Maecenas sagittis congue ipsum eget vestibulum. Donec lorem diam, convallis sit amet gravida sit amet, aliquet vitae massa. Fusce in dapibus leo.
-    <br><br>
-    Aliquam eget feugiat libero. In id purus nec lectus tempor tristique in a magna. Phasellus vel libero lorem. Proin nunc risus, ornare ut tempus id, imperdiet ac lacus. Praesent viverra ornare ligula sit amet lobortis. Maecenas consequat neque eu erat condimentum pharetra. Nunc lacinia at mi vel semper. Suspendisse potenti. Aenean lobortis, tellus sit amet gravida porttitor, turpis metus scelerisque dolor, a viverra massa risus sit amet ligula. Quisque dapibus nisl orci, id condimentum erat pulvinar at. Nunc rutrum tincidunt quam, at gravida tellus consequat et. Aliquam posuere interdum urna gravida auctor. Nullam commodo lacus eu tristique vulputate.</p>
+            <p class="lead text-center text-light">{{description}}</p>
 
-</div>
+            <br><br>
+            <p class="text-start pb-5 text-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu mi a nibh rhoncus porttitor. Nam molestie velit erat, ac dignissim lectus congue vitae. Suspendisse a justo finibus, viverra leo nec, ornare diam. In aliquet blandit tellus, et porttitor ante laoreet a. Aenean pharetra velit eu mauris commodo porta. Aenean eget felis at dolor condimentum sodales rutrum rhoncus lorem. Integer a ligula et leo iaculis venenatis. Nunc aliquet consequat lacus, ac convallis ante hendrerit eget.
+            <br><br>
+            Aenean vestibulum mi ac urna feugiat euismod. Vivamus non elementum tortor, vitae commodo velit. Ut sit amet suscipit diam, non euismod tellus. Phasellus sagittis luctus consectetur. Fusce porttitor nisi non ante fermentum commodo id sit amet augue. Maecenas sagittis congue ipsum eget vestibulum. Donec lorem diam, convallis sit amet gravida sit amet, aliquet vitae massa. Fusce in dapibus leo.
+            <br><br>
+            Aliquam eget feugiat libero. In id purus nec lectus tempor tristique in a magna. Phasellus vel libero lorem. Proin nunc risus, ornare ut tempus id, imperdiet ac lacus. Praesent viverra ornare ligula sit amet lobortis. Maecenas consequat neque eu erat condimentum pharetra. Nunc lacinia at mi vel semper. Suspendisse potenti. Aenean lobortis, tellus sit amet gravida porttitor, turpis metus scelerisque dolor, a viverra massa risus sit amet ligula. Quisque dapibus nisl orci, id condimentum erat pulvinar at. Nunc rutrum tincidunt quam, at gravida tellus consequat et. Aliquam posuere interdum urna gravida auctor. Nullam commodo lacus eu tristique vulputate.</p>
+
+        </div>
 
 

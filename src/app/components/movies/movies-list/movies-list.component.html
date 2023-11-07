@@ -1,34 +1,52 @@
 <div class="background-page">
-    <div class="container">
-        <h1 class="text-center pt-3">Explora tus películas</h1>
+	<div class="container">
+		<h1 class="text-center pt-3">Explora tus películas</h1>
 
-        <p class="text-center lead">Listamos las películas que tenemos en nuestra base de datos en MYSQL.</p>
+		<p class="text-center lead">
+			Listamos las películas que tenemos en nuestra base de datos en
+			MYSQL.
+		</p>
 
-        <!-- ESTE CONTENEDOR TIENE QUE RENDERIZAR UN LOADER CUANDO ESTEMOS PIDIENDO LA DATA AL BACKEND -->
-        <ng-container *ngIf="!movies">
-            <div>
-                <h4>Loading</h4>
-            </div>
-        </ng-container>
+		<!-- ESTE CONTENEDOR TIENE QUE RENDERIZAR UN LOADER CUANDO ESTEMOS PIDIENDO LA DATA AL BACKEND -->
+		<ng-container *ngIf="!movies">
+			<div>
+				<h4>Loading</h4>
+			</div>
+		</ng-container>
 
-        <div class="section d-flex justify-content-center flex-wrap gap-3 pt-4 pb-5">
-            <ng-container *ngFor="let movie of movies">
-                <div class="card movieCard shadow-sm">
-                    <img src={{movie.image}} class="card-img-top" alt="...">
-                    <div class="card-body mt-2">
-                        <h4 class="card-title fw-bold">{{movie.title}}</h4>
-                        <h6 class="lead fs-6 text-green">{{movie.year}}</h6>
-                        <br>
-                        <p class="card-text card__preview-text fw-light">{{movie.summary}}</p>
-                        <br>
-                        <h6 class="card-title">Comment:</h6>
-                        <p class="card-text card__preview-text fs-6 fw-light">{{movie.comment}}</p>
-                        <br>
-                        <button class="btn btn-outline-dark rounded-pill" (click)=MovieInfo(movie.id)>read more</button>
-                    </div>
-                </div>
-            </ng-container>
-        </div>
+		<div
+			class="section d-flex justify-content-center flex-wrap gap-3 pt-4 pb-5"
+		>
+			<ng-container *ngFor="let movie of movies">
+				<div class="card movieCard shadow-sm">
+					<img
+						src="{{ movie.image }}"
+						class="card-img-top"
+						alt="..."
+					/>
+					<div class="card-body mt-2">
+						<h4 class="card-title fw-bold">{{ movie.title }}</h4>
+						<h6 class="lead fs-6 text-green">
+							{{ movie.year }}
+						</h6>
 
-    </div>
+						<p class="card-text card__preview-text fw-light">
+							{{ movie.summary }}
+						</p>
+						<br />
+						<h6 class="card-title">Comment:</h6>
+						<p class="card-text card__preview-text fs-6 fw-light">
+							{{ movie.comment }}
+						</p>
+						<button
+							class="btn btn-sm btn-outline-dark rounded-pill"
+							(click)="MovieInfo(movie.id)"
+						>
+							read more
+						</button>
+					</div>
+				</div>
+			</ng-container>
+		</div>
+	</div>
 </div>

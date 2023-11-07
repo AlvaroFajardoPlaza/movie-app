@@ -8,18 +8,22 @@ import { PricingComponent } from './components/pricing/pricing.component';
 import { FeaturesComponent } from './components/features/features.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { MovieComponent } from './components/movies/movie/movie.component';
+import { RegisterComponent } from './components/registration/register/register.component';
+import { LoginComponent } from './components/registration/login/login.component';
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
-  {path: 'explore-movies', component: MoviesListComponent},
-  {path: 'explore-movies/:id', component: MovieComponent},
-  {path: 'pricing', component: PricingComponent},
-  {path: 'features', component: FeaturesComponent},
-  {path: 'about-us', component: AboutUsComponent}
+	{ path: 'home', component: HomeComponent },
+	{ path: 'explore-movies', component: MoviesListComponent },
+	{ path: 'explore-movies/:id', component: MovieComponent },
+	{ path: 'pricing', component: PricingComponent },
+	{ path: 'features', component: FeaturesComponent },
+	{ path: 'about-us', component: AboutUsComponent },
+	{ path: 'register', component: RegisterComponent },
+	{ path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

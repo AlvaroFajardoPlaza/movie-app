@@ -1,0 +1,43 @@
+<div class="bg-dark p-5">
+	<div class="container d-flex justify-content-center">
+		<!-- Creamos nuestro formulario y los campos que va a registrar: -->
+		<div class="loginCard card bg-dark text-light p-5">
+			<form [formGroup]="LoginForm" (ngSubmit)="onSubmit()">
+				<h4 class="lead fs-3 mb-4 text-center">
+					Welcome back to Movie Review!
+				</h4>
+				<div class="mb-3">
+					<label class="lead fs-6 mb-2">Email</label>
+					<input
+						type="email"
+						class="form-control"
+						formControlName="email"
+					/>
+				</div>
+
+				<div class="mb-4">
+					<label class="lead fs-6 mb-2">Password</label>
+					<input
+						type="password"
+						class="form-control"
+						formControlName="password"
+					/>
+				</div>
+
+				<div class="mb-3 d-flex gap-3">
+					<button type="submit" class="btn btn-outline-light">
+						Login
+					</button>
+
+					<button class="btn btn-hidden">
+						<a
+							class="lead fs-6 text-light"
+							(click)="navigateToRegister()"
+							>I don't have an account</a
+						>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

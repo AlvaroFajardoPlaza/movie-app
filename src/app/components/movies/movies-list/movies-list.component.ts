@@ -39,6 +39,6 @@ export class MoviesListComponent {
 
 	// Ruta para navegar a los datos de 1 película
 	MovieInfo(id: Number) {
-		this._router.navigate(['explore-movies', id]);
+		this._router.navigate([/movies/, id]);
 	}
 }

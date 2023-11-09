@@ -3,7 +3,8 @@
 }
 
 .movieCard {
-    width: 16rem;
+    width: 17rem;
+    max-height: 48rem;
 }
 
 .image-card-container {
@@ -12,6 +13,7 @@
 
 .card-img-top {
     object-fit: contain;
+    height: 24rem;
 }
 
 //Estas líneas de CSS nos permiten ocultar las parrafadas de texto y hacer las cards más pequeñas

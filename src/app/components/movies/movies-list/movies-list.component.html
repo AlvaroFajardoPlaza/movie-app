@@ -10,7 +10,7 @@
 		<!-- ESTE CONTENEDOR TIENE QUE RENDERIZAR UN LOADER CUANDO ESTEMOS PIDIENDO LA DATA AL BACKEND -->
 		<ng-container *ngIf="!movies">
 			<div>
-				<h4>Loading</h4>
+				<h4 class="mt-5">Loading</h4>
 			</div>
 		</ng-container>
 
@@ -24,7 +24,9 @@
 						class="card-img-top"
 						alt="..."
 					/>
-					<div class="card-body mt-2">
+					<div
+						class="card-body mt-2 flex-column justify-content-start"
+					>
 						<h4 class="card-title fw-bold">{{ movie.title }}</h4>
 						<h6 class="lead fs-6 text-green">
 							{{ movie.year }}
@@ -34,10 +36,12 @@
 							{{ movie.summary }}
 						</p>
 						<br />
-						<h6 class="card-title">Comment:</h6>
+						<!-- <h6 class="card-title">Comment:</h6>
 						<p class="card-text card__preview-text fs-6 fw-light">
 							{{ movie.comment }}
-						</p>
+						</p> -->
+					</div>
+					<div class="card-footer">
 						<button
 							class="btn btn-sm btn-outline-dark rounded-pill"
 							(click)="MovieInfo(movie.id)"

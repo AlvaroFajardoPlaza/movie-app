@@ -21,8 +21,10 @@ export class MovieComponent implements OnInit, OnDestroy {
 	movie$: Observable<Movie> = this._activatedRoute.paramMap.pipe(
 		// De las variables de la url, nos quedamos sólo con el id
 		map((params: ParamMap) => params.get('id')),
+
 		// Si no llega el id, no continuamos
 		filter((id: string | null) => !!id),
+
 		// Obtenemos la película a través del id
 		switchMap((id: string) => this.movieService.findById(+id))
 	);

@@ -11,6 +11,7 @@ import { MovieComponent } from './components/movies/movie/movie.component';
 import { RegisterComponent } from './components/registration/register/register.component';
 import { LoginComponent } from './components/registration/login/login.component';
 import { authPermissionGuard } from './guards/auth-permission.guard';
+import { NewMovieFormComponent } from './components/movies/movies-list/new-movie-form/new-movie-form.component';
 
 const routes: Routes = [
 	{ path: 'home', component: HomeComponent },
@@ -19,6 +20,11 @@ const routes: Routes = [
 		component: MoviesListComponent,
 		canActivate: [authPermissionGuard]
 		//children: [{ path: ':id', component: MovieComponent }]
+	},
+	{
+		path: 'explore-movies/add',
+		component: NewMovieFormComponent,
+		canActivate: [authPermissionGuard]
 	},
 	{
 		path: 'explore-movies/:id',

@@ -41,4 +41,27 @@ export class MoviesListComponent {
 	MovieInfo(id: Number) {
 		this._router.navigate([/movies/, id]);
 	}
+
+	AddNewMovie() {
+		this._router.navigate(['explore-movies/add']);
+	}
+
+	Delete(id: Number) {
+		console.log('El id de la película es: ', id);
+
+		// Nos tenemos que asegurar de subscribirnos al observable para manejar la respuesta a la llamada HTTP
+		if (id) {
+			this._movieService.delete(id).subscribe(
+				() => {
+					console.log('Película eliminada!');
+					this.movies = this.movies.filter(
+						(movie) => movie.id !== id
+					);
+				},
+				(err) => {
+					console.log('Ha habido un error', err);
+				}
+			);
+		}
+	}
 }

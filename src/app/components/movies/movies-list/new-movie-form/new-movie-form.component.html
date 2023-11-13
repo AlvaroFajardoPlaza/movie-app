@@ -1,0 +1,185 @@
+<div class="container">
+	<form
+		class="bg-secondary p-3 m-3"
+		[formGroup]="newMovieForm"
+		(ngSubmit)="onSubmit()"
+	>
+		<h4 class="text-center lead fs-2">Añade una nueva película</h4>
+		<!-- TITLE -->
+		<div class="mb-3">
+			<label class="lead fs-6 mb-2"
+				>Title<span class="text-danger"> *</span></label
+			>
+			<input
+				type="text"
+				class="form-control"
+				formControlName="title"
+				required
+			/>
+			<div
+				class="alert alert-danger mt-2"
+				*ngIf="
+					newMovieForm.get('title').touched &&
+					newMovieForm.get('title').hasError('required')
+				"
+			>
+				Este campo es requerido
+			</div>
+			<div
+				class="alert alert-danger mt-2"
+				*ngIf="
+					newMovieForm.get('title').touched &&
+					newMovieForm.get('title').hasError('minlength')
+				"
+			>
+				El título es demasiado corto!
+			</div>
+			<div
+				class="alert alert-danger mt-2"
+				*ngIf="
+					newMovieForm.get('title').touched &&
+					newMovieForm.get('title').hasError('maxlength')
+				"
+			>
+				El título es demasiado largo!
+			</div>
+		</div>
+		<!-- YEAR -->
+		<div class="mb-3">
+			<label class="lead fs-6 mb-2"
+				>Year<span class="text-danger"> *</span></label
+			>
+			<input
+				type="number"
+				class="form-control"
+				formControlName="year"
+				required
+			/>
+			<div
+				*ngIf="
+					newMovieForm.get('year').touched &&
+					newMovieForm.get('year').hasError('required')
+				"
+				class="alert alert-danger mt-2"
+			>
+				Este campo es requerido.
+			</div>
+		</div>
+		<!-- SUMMARY -->
+		<div class="mb-3">
+			<label class="lead fs-6 mb-2"
+				>Summary<span class="text-danger"> *</span></label
+			>
+			<input
+				type="text-area"
+				class="form-control"
+				formControlName="summary"
+				required
+			/>
+			<div
+				class="alert alert-danger mt-2"
+				*ngIf="
+					newMovieForm.get('summary').touched &&
+					newMovieForm.get('summary').hasError('required')
+				"
+			>
+				Este campo es requerido
+			</div>
+			<div
+				class="alert alert-danger mt-2"
+				*ngIf="
+					newMovieForm.get('summary').touched &&
+					newMovieForm.get('summary').hasError('minlength')
+				"
+			>
+				Esta descripción es demasiado corta!
+			</div>
+			<div
+				class="alert alert-danger mt-2"
+				*ngIf="
+					newMovieForm.get('summary').touched &&
+					newMovieForm.get('summary').hasError('maxlength')
+				"
+			>
+				Esta descripción es demasiado extensa!
+			</div>
+		</div>
+
+		<!-- COMMENT -->
+		<div class="mb-3">
+			<label class="lead fs-6 mb-2">Comment</label>
+			<input
+				type="text-area"
+				class="form-control"
+				formControlName="comment"
+				required
+			/>
+		</div>
+
+		<!-- IMAGE -->
+		<div class="mb-3">
+			<label class="lead fs-6 mb-2"
+				>Image<span class="text-light">
+					(acepta una url de la imagen de la película)</span
+				></label
+			>
+			<input
+				type="text"
+				class="form-control"
+				formControlName="image"
+				required
+			/>
+		</div>
+
+		<!-- GENRE1 -->
+		<div class="mb-3">
+			<label class="lead fs-6 mb-2">Genre 1</label>
+			<input
+				type="number"
+				class="form-control"
+				formControlName="genre1"
+				required
+			/>
+		</div>
+
+		<!-- GENRE2 -->
+		<div class="mb-3">
+			<label class="lead fs-6 mb-2">Genre 2</label>
+			<input
+				type="number"
+				class="form-control"
+				formControlName="genre2"
+				required
+			/>
+		</div>
+
+		<!-- CAST -->
+		<div class="mb-3">
+			<label class="lead fs-6 mb-2">Cast</label>
+			<input
+				type="text-area"
+				class="form-control"
+				formControlName="cast"
+				required
+			/>
+		</div>
+
+		<!-- DIRECTOR -->
+		<div class="mb-3">
+			<label class="lead fs-6 mb-2">Director</label>
+			<input
+				type="text-area"
+				class="form-control"
+				formControlName="director"
+				required
+			/>
+		</div>
+
+		<!-- BOTÓN DE SUBMIT -->
+		<div class="mb-3 text-center">
+			<button type="submit" class="btn btn-primary shadow-sm">
+				Añadir película
+			</button>
+		</div>
+	</form>
+</div>

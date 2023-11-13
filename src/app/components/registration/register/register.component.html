@@ -1,35 +1,122 @@
 <div class="bg-dark p-5">
 	<div class="container d-flex justify-content-center">
-		<!-- Creamos nuestro formulario y los campos que va a registrar: -->
+		<!-- Creamos nuestro formulario reactivo y los campos que va a registrar: -->
 		<div class="registerCard card bg-dark text-light p-5">
-			<form [formGroup]="RegisterForm" (ngSubmit)="onSubmit()">
+			<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 				<h4 class="lead fs-3 mb-4 text-center">Register new user</h4>
 
 				<div class="mb-3">
-					<label class="lead fs-6 mb-2">Username</label>
+					<label class="lead fs-6 mb-2 form-label"
+						>Username <span class="text-danger">*</span></label
+					>
 					<input
+						name="username"
 						type="text"
 						class="form-control"
 						formControlName="username"
+						required
 					/>
+					<div
+						*ngIf="
+							registerForm.get('username').touched &&
+							registerForm.get('username').hasError('required')
+						"
+						class="mt-2 alert alert-danger"
+					>
+						Este campo es requerido
+					</div>
+					<div
+						*ngIf="
+							registerForm.get('username').touched &&
+							registerForm.get('username').hasError('minlength')
+						"
+						class="mt-2 alert alert-danger"
+					>
+						La longitud mínima para el username son
+						{{
+							registerForm.get("username").errors["minlength"]
+								?.requiredLength
+						}}
+						carácteres.
+					</div>
+					<div
+						*ngIf="
+							registerForm.get('username').touched &&
+							registerForm.get('username').hasError('maxlength')
+						"
+						class="mt-2 alert alert-danger"
+					>
+						La longitud máxima para el username son
+						{{
+							registerForm.get("username").errors["maxlength"]
+								?.requiredLength
+						}}
+						carácteres.
+					</div>
 				</div>
 
 				<div class="mb-3">
-					<label class="lead fs-6 mb-2">Email</label>
+					<label
+						class="lead fs-6 mb-2 form-label"
+						for="email-register-form"
+						>Email<span class="text-danger"> *</span></label
+					>
 					<input
+						id="email-register-form"
 						type="email"
 						class="form-control"
 						formControlName="email"
+						required
 					/>
+					<div
+						*ngIf="
+							registerForm.get('email').touched &&
+							registerForm.get('email').hasError('required')
+						"
+						class="mt-2 alert alert-danger"
+					>
+						Este campo es requerido
+					</div>
+					<div
+						*ngIf="
+							registerForm.get('email').touched &&
+							registerForm.get('email').hasError('email')
+						"
+						class="mt-2 alert alert-danger"
+					>
+						Introduce un email válido
+					</div>
 				</div>
 
 				<div class="mb-4">
-					<label class="lead fs-6 mb-2">Password</label>
+					<label class="lead fs-6 mb-2 form-label"
+						>Password <span class="text-danger"> *</span></label
+					>
 					<input
 						type="password"
 						class="form-control"
 						formControlName="password"
+						required
 					/>
+					<div
+						*ngIf="
+							registerForm.get('password').touched &&
+							registerForm.get('password').hasError('required')
+						"
+						class="mt-2 alert alert-danger"
+					>
+						Tienes que introducir una contraseña.
+					</div>
+					<div
+						*ngIf="
+							registerForm.get('password').touched &&
+							registerForm.get('password').hasError('pattern')
+						"
+						class="mt-2 alert alert-danger"
+					>
+						La contraseña debe tener entre 8 y 20 carácteres e
+						incluir mayúsculas, minísculas y números.
+					</div>
 				</div>
 
 				<div class="mb-3 d-flex gap-3">
@@ -37,13 +124,13 @@
 						Register
 					</button>
 
-					<button class="btn btn-hidden">
-						<a
-							class="lead fs-6 text-light"
-							(click)="navigateToLogin()"
-							>I already have an account</a
-						>
-					</button>
+					<a
+						role="button"
+						class="btn text-light"
+						(click)="navigateToLogin()"
+						>I already have an account</a
+					>
+					<!-- <p>Form Status: {{ registerForm2.status }}</p> -->
 				</div>
 			</form>
 		</div>

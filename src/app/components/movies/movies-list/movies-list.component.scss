@@ -7,13 +7,13 @@
     max-height: 48rem;
 }
 
-.image-card-container {
-    max-height: 10rem;
+.card-head {
+    min-height: 8rem;
 }
 
 .card-img-top {
     object-fit: contain;
-    height: 24rem;
+    height: 22rem;
 }
 
 //Estas líneas de CSS nos permiten ocultar las parrafadas de texto y hacer las cards más pequeñas

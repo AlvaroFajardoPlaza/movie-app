@@ -60,20 +60,30 @@
 		</div>
 
 		<div class="d-flex gap-2">
-			<button
-				type="button"
-				class="btn btn-dark"
-				(click)="registerRedirect()"
-			>
-				Register new user
-			</button>
-			<button
-				type="button"
-				class="btn btn-outline-light rounded"
-				(click)="loginRedirect()"
-			>
-				Login
-			</button>
+			<ng-container *ngIf="user$ | async as user; else noUserTpt">
+				<button class="btn btn-secondary">
+					{{ user.email }}
+				</button>
+				<button class="btn btn-outline-light" (click)="logout()">
+					Log out <span class="bi-plus-square-fill"></span>
+				</button>
+			</ng-container>
+			<ng-template #noUserTpt>
+				<button
+					type="button"
+					class="btn btn-dark"
+					(click)="registerRedirect()"
+				>
+					Register new user
+				</button>
+				<button
+					type="button"
+					class="btn btn-outline-light rounded"
+					(click)="loginRedirect()"
+				>
+					Login
+				</button>
+			</ng-template>
 		</div>
 	</div>
 </nav>

@@ -7,6 +7,16 @@
 			MYSQL.
 		</p>
 
+		<div class="d-flex justify-content-center gap-2 mt-3 mb-3">
+			<h4 class="lead">Añade una nueva película:</h4>
+			<button
+				class="btn btn-sm btn-secondary rounded-pill shadow"
+				(click)="AddNewMovie()"
+			>
+				Añadir
+			</button>
+		</div>
+
 		<!-- ESTE CONTENEDOR TIENE QUE RENDERIZAR UN LOADER CUANDO ESTEMOS PIDIENDO LA DATA AL BACKEND -->
 		<ng-container *ngIf="!movies">
 			<div>
@@ -19,11 +29,15 @@
 		>
 			<ng-container *ngFor="let movie of movies">
 				<div class="card movieCard shadow-sm">
-					<img
-						src="{{ movie.image }}"
-						class="card-img-top"
-						alt="..."
-					/>
+					<div class="card-head">
+						<img
+							src="{{ movie.image }}"
+							class="card-img-top mt-2"
+							alt="..."
+							(click)="MovieInfo(movie.id)"
+						/>
+					</div>
+
 					<div
 						class="card-body mt-2 flex-column justify-content-start"
 					>
@@ -35,18 +49,23 @@
 						<p class="card-text card__preview-text fw-light">
 							{{ movie.summary }}
 						</p>
-						<br />
 						<!-- <h6 class="card-title">Comment:</h6>
 						<p class="card-text card__preview-text fs-6 fw-light">
 							{{ movie.comment }}
 						</p> -->
 					</div>
-					<div class="card-footer">
+					<div class="card-footer d-flex justify-content-start gap-2">
 						<button
 							class="btn btn-sm btn-outline-dark rounded-pill"
 							(click)="MovieInfo(movie.id)"
 						>
 							read more
+						</button>
+						<button
+							class="btn btn-sm btn-outline-danger rounded-pill"
+							(click)="Delete(movie.id)"
+						>
+							delete movie
 						</button>
 					</div>
 				</div>

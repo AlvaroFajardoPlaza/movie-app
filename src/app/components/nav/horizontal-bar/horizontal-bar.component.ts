@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { OnInit } from '@angular/core';
 import { MenuItem } from 'src/app/models/MenuItem.interface';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
 	selector: 'app-horizontal-bar',
@@ -11,6 +10,10 @@ import { MenuItem } from 'src/app/models/MenuItem.interface';
 })
 export class HorizontalBarComponent implements OnInit {
 	private _router = inject(Router);
+	private _authSvc = inject(AuthService);
+
+	user$ = this._authSvc.user$;
+
 	//Creamos nuestro listado de menuItems
 	MenuItems: Array<MenuItem> = [
 		{
@@ -32,6 +35,8 @@ export class HorizontalBarComponent implements OnInit {
 	];
 	constructor() {}
 
+	ngOnInit(): void {}
+
 	registerRedirect() {
 		this._router.navigate(['register']);
 	}
@@ -40,5 +45,7 @@ export class HorizontalBarComponent implements OnInit {
 		this._router.navigate(['login']);
 	}
 
-	ngOnInit(): void {}
+	logout() {
+		this._authSvc.logout();
+	}
 }

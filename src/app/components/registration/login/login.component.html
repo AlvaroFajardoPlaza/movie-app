@@ -7,21 +7,54 @@
 					Welcome back to Movie Review!
 				</h4>
 				<div class="mb-3">
-					<label class="lead fs-6 mb-2">Email</label>
+					<label class="lead fs-6 mb-2"
+						>Email<span class="text-danger"> *</span></label
+					>
 					<input
 						type="email"
 						class="form-control"
 						formControlName="email"
+						required
 					/>
+					<div
+						*ngIf="
+							LoginForm.get('email').touched &&
+							LoginForm.get('email').hasError('required')
+						"
+						class="mt-2 alert alert-danger"
+					>
+						Este campo es requerido.
+					</div>
+					<div
+						*ngIf="
+							LoginForm.get('email').touched &&
+							LoginForm.get('email').hasError('email')
+						"
+						class="mt-2 alert alert-danger"
+					>
+						Introduce un email válido.
+					</div>
 				</div>
 
 				<div class="mb-4">
-					<label class="lead fs-6 mb-2">Password</label>
+					<label class="lead fs-6 mb-2"
+						>Password<span class="text-danger"> *</span></label
+					>
 					<input
 						type="password"
 						class="form-control"
 						formControlName="password"
+						required
 					/>
+					<div
+						class="mt-2 alert alert-danger"
+						*ngIf="
+							LoginForm.get('password').touched &&
+							LoginForm.get('password').hasError('required')
+						"
+					>
+						Este campo es requerido
+					</div>
 				</div>
 
 				<div class="mb-3 d-flex gap-3">

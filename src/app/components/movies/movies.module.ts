@@ -4,10 +4,21 @@ import { MoviesListComponent } from './movies-list/movies-list.component';
 import { MovieComponent } from './movie/movie.component';
 import { NewMovieFormComponent } from './movies-list/new-movie-form/new-movie-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommentsListComponent } from './movie/comments-list/comments-list.component';
 
 @NgModule({
-	declarations: [MoviesListComponent, MovieComponent, NewMovieFormComponent],
+	declarations: [
+		MoviesListComponent,
+		MovieComponent,
+		NewMovieFormComponent,
+		CommentsListComponent
+	],
 	imports: [CommonModule, ReactiveFormsModule],
-	exports: [MoviesListComponent, MovieComponent, NewMovieFormComponent]
+	exports: [
+		MoviesListComponent,
+		MovieComponent,
+		NewMovieFormComponent,
+		CommentsListComponent
+	]
 })
 export class MoviesModule {}

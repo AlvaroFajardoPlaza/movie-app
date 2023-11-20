@@ -28,9 +28,9 @@ export class MoviesService {
 	}
 
 	// Añadimos una nueva película y solicitamos una Promesa
-	post(movieValues: Movie) {
+	post(movieValues: Movie): Observable<Movie> {
 		console.log('Estos son los valores del formulario: ', movieValues);
-		this.http.post<Movie>(
+		return this.http.post<Movie>(
 			`${environment.baseUrl}/${this.prefix}`,
 			movieValues
 		);

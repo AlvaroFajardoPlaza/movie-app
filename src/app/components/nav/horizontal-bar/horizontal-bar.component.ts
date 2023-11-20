@@ -29,8 +29,8 @@ export class HorizontalBarComponent implements OnInit {
 			route: 'pricing'
 		},
 		{
-			label: 'about us',
-			route: 'about-us'
+			label: 'about me',
+			route: 'about-me'
 		}
 	];
 	constructor() {}

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MoviesService } from 'src/app/services/movies.service';
 import { Movie } from 'src/app/models/movie.interface';
-import { Observable, Subscription, filter, map, switchMap } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-movies-list',

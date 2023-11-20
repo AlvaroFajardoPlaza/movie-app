@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { MoviesService } from 'src/app/services/movies.service';
 
 @Component({
@@ -18,14 +19,14 @@ export class NewMovieFormComponent {
 	constructor() {
 		this.newMovieForm = this._formBuilder.group({
 			title: [
-				'',
+				null,
 				[
 					Validators.required,
 					Validators.minLength(2),
 					Validators.maxLength(60)
 				]
 			],
-			year: ['', [Validators.required]],
+			year: [null, [Validators.required]],
 			summary: [
 				'',
 				[
@@ -34,18 +35,21 @@ export class NewMovieFormComponent {
 					Validators.maxLength(200)
 				]
 			],
-			comment: ['', []],
-			image: ['', []],
-			genre1: ['', []],
-			genre2: ['', []],
-			cast: ['', []],
-			director: ['', []]
+			comment: [null, []], // En la base de datos modificaste las características de este campo para que pudiera ser null
+			image: [null, []], // Idem a arriba...
+			genre1: [null, []],
+			genre2: [null, []],
+			cast: [null, []],
+			director: [null, []]
 		});
 	}
 
 	async onSubmit() {
-		const response = await this._movieService.post(this.newMovieForm.value);
+		const response = await firstValueFrom(
+			this._movieService.post(this.newMovieForm.value)
+		);
 		console.log('Hacemos submit del form', this.newMovieForm.value);
+		console.log('response', response);
 
 		// Falta realizar la redirección del usuario a la página de explore-movies
 		this._router.navigate(['explore-movies']);

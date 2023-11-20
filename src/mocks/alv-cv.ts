@@ -1,0 +1,427 @@
+export const alvaroCurriculum = {
+	$schema:
+		'https://raw.githubusercontent.com/getmanfred/mac/v0.3/schema/schema.json',
+	settings: {
+		language: 'ES',
+		MACVersion: '0.3'
+	},
+	aboutMe: {
+		profile: {
+			name: 'Álvaro',
+			surnames: 'Fajardo Plaza',
+			title: 'Title',
+			description:
+				'Mi nombre es Álvaro Fajardo Plaza y soy desarrollador y diseñador gráfico. Cuento con una sólida formación académica y experiencia práctica. He completado dos másters relacionados con el desarrollo web, uno en diseño gráfico y web y otro en Full Stack Dev.\n\nAdemás tengo experiencia en el desarrollo de proyectos web de diferentes tamaños y complejidades. He trabajado en proyectos para clientes de diversos sectores. También tengo experiencia en el diseño de interfaces de usuario y el desarrollo de aplicaciones web gracias a los dos másters que cursé en los últimos años.\n\nSoy una persona ambiciosa con fuerte determinación y deseo de crecimiento profesional. Mi trayectoria en comunicación me ha permitido desarrollar una mente activa y creativa. Me motiva aprender de forma autónoma y plantearme nuevos retos y tengo una fuerte capacidad de adaptación y compromiso profesional.\n\nCreo en mis habilidades y experiencia para contribuir de forma significativa en el éxito de los proyectos en los que trabajo.\n\n',
+			location: {
+				notes: 'Autocompleted using Google Maps API (id: ChIJi7xhMnjjQgwR7KNoB5Qs7KY)',
+				country: 'España'
+			}
+		},
+		relevantLinks: [
+			{
+				type: 'linkedin',
+				URL: 'https://www.linkedin.com/in/alvaro-fajardo-plaza-347b0218b/'
+			},
+			{
+				type: 'github',
+				URL: 'https://github.com/AlvaroFajardoPlaza?tab=repositories'
+			},
+			{
+				type: 'other',
+				URL: 'https://alvarofajardo.com/'
+			}
+		]
+	},
+	experience: {
+		jobs: [
+			{
+				organization: {
+					name: 'LANDE S.A.'
+				},
+				roles: [
+					{
+						name: 'DISEÑADOR GRÁFICO, ARTE FINALISTA Y MAQUETADOR',
+						startDate: '2022-03-01',
+						finishDate: '2023-06-01',
+						challenges: [
+							{
+								description:
+									'Maquetación de catálogos para impresión y entorno web, adaptación de artes finales, servicio a marcas de cosmética (Rituals, Calming Park, The Lab Room, MAAR, Argan Meadow, Deep Nature...), sector hotelero (Grupo Meliá, Grupo NH, Grupo Barceló...), Repsol y sector hospitalario, relación con proveedores, diseño de página web, fotografía y edición de producto.\n'
+							}
+						],
+						competences: [
+							{
+								name: 'Adobe CC',
+								type: 'technology'
+							},
+							{
+								name: 'Adobe InDesign',
+								type: 'technology'
+							},
+							{
+								name: 'Adobe Photoshop',
+								type: 'technology'
+							},
+							{
+								name: 'Bootstrap',
+								type: 'technology'
+							},
+							{
+								name: 'CSS',
+								type: 'technology'
+							},
+							{
+								name: 'HTML',
+								type: 'technology'
+							}
+						]
+					}
+				]
+			}
+		],
+		projects: [
+			{
+				details: {
+					name: 'HOMEHUB',
+					description:
+						'TFM desarrollado en grupo - Homehub: una app de domótica para el hogar que conecta diferentes dispositivos y los muestra en una interfaz sencilla de manejar para el usuario. Implementación de formularios, consultas y llamadas a BBDD en Mongo, subida de imágenes con Cloudinary, registro y gestión de usuarios dentro de la app, implementación de envío de correos a usuarios, estilado de la aplicación en Material UI.\n\n\nhttps://github.com/FSDSTR0323/amarillo-frontend\nhttps://github.com/FSDSTR0323/amarillo-backend'
+				},
+				type: 'sideProject',
+				roles: [
+					{
+						name: 'Developer',
+						startDate: '2023-04-01',
+						competences: [
+							{
+								name: 'Express',
+								type: 'technology'
+							},
+							{
+								name: 'MongoDB',
+								type: 'technology'
+							},
+							{
+								name: 'NodeJS',
+								type: 'technology'
+							},
+							{
+								name: 'React',
+								type: 'technology'
+							}
+						],
+						finishDate: '2023-07-01'
+					}
+				]
+			}
+		]
+	},
+	knowledge: {
+		languages: [
+			{
+				name: 'EN',
+				level: 'Full professional proficiency'
+			},
+			{
+				name: 'ES',
+				level: 'Native or bilingual proficiency'
+			}
+		],
+		hardSkills: [
+			{
+				skill: {
+					name: 'AngularJS',
+					type: 'technology'
+				}
+			},
+			{
+				skill: {
+					name: 'Bootstrap',
+					type: 'technology'
+				}
+			},
+			{
+				skill: {
+					name: 'CSS',
+					type: 'technology'
+				}
+			},
+			{
+				skill: {
+					name: 'Docker',
+					type: 'technology'
+				}
+			},
+			{
+				skill: {
+					name: 'HTML',
+					type: 'technology'
+				}
+			},
+			{
+				skill: {
+					name: 'JavaScript',
+					type: 'technology'
+				}
+			},
+			{
+				skill: {
+					name: 'MaterialUI',
+					type: 'technology'
+				}
+			},
+			{
+				skill: {
+					name: 'MongoDB',
+					type: 'technology'
+				}
+			},
+			{
+				skill: {
+					name: 'MySQL',
+					type: 'technology'
+				}
+			},
+			{
+				skill: {
+					name: 'NodeJS',
+					type: 'technology'
+				}
+			},
+			{
+				skill: {
+					name: 'React',
+					type: 'technology'
+				}
+			},
+			{
+				skill: {
+					name: 'TypeScript',
+					type: 'technology'
+				}
+			},
+			{
+				skill: {
+					name: 'WordPress',
+					type: 'technology'
+				}
+			}
+		],
+		studies: [
+			{
+				studyType: 'certification',
+				degreeAchieved: false,
+				name: 'B2 Certificado',
+				startDate: '2016-06-01',
+				institution: {
+					name: 'Cambridge',
+					description:
+						'El B2 de Cambridge es un certificado de inglés reconocido internacionalmente. Es una prueba de que tienes un buen nivel de inglés y permite demostrar ese nivel dentro del mundo profesional. El Certificado B2 de Cambridge te ayuda a comunicarte de forma efectiva en el ámbito profesional, tanto en el entorno laboral como en el ámbito académico.'
+				}
+			},
+			{
+				studyType: 'officialDegree',
+				degreeAchieved: true,
+				name: 'GRADO EN PUBLICIDAD Y RRPP',
+				startDate: '2017-09-01',
+				institution: {
+					name: 'Universidad Complutense de Madrid',
+					URL: 'https://www.ucm.es/estudios/grado-publicidadyrelacionespublicas'
+				},
+				finishDate: '2020-06-01'
+			},
+			{
+				studyType: 'officialDegree',
+				degreeAchieved: true,
+				name: 'MÁSTER DISEÑO GRÁFICO, DESARROLLO WEB Y UX ESDIMA',
+				startDate: '2021-09-01',
+				institution: {
+					name: 'ESDIMA ',
+					description:
+						'Este máster me proporcionó los conocimientos y habilidades necesarios para diseñar y crear mi propio proyecto integral gráfico y web. Aprendí a utilizar las principales herramientas de diseño gráfico de Adobe, como Photoshop, Illustrator e InDesign, así como HTML, CSS, WordPress, UX, etc.\n\nLa formación es práctica y se centra en el desarrollo de proyectos reales. Diseñé y gestioné proyectos de diseño gráfico, como logotipos, carteles, folletos, etc., y proyectos de desarrollo web, como páginas web, tiendas online, etc.\n\nAl final del máster, tuve que presentar mi propio proyecto integral gráfico y web de marca persona, desde el concepto hasta la implementación.',
+					URL: 'https://xn--master-diseo-khb.com/grafico-web-madrid-online/'
+				},
+				finishDate: '2022-06-01',
+				linkedCompetences: [
+					{
+						name: 'Adobe CC',
+						type: 'technology'
+					},
+					{
+						name: 'Adobe InDesign',
+						type: 'technology'
+					},
+					{
+						name: 'Adobe Photoshop',
+						type: 'technology'
+					},
+					{
+						name: 'CSS',
+						type: 'technology'
+					},
+					{
+						name: 'Elementor',
+						type: 'technology'
+					},
+					{
+						name: 'HTML',
+						type: 'technology'
+					},
+					{
+						name: 'WordPress',
+						type: 'technology'
+					}
+				]
+			},
+			{
+				studyType: 'officialDegree',
+				degreeAchieved: true,
+				name: 'MÁSTER EN DESARROLLO FULL-STACK',
+				startDate: '2023-01-01',
+				institution: {
+					name: 'Nuclio Digital School',
+					description:
+						'En julio finalicé el máster en Desarrollo Full Stack en Nuclio Digital School. El máster tenía una orientación 100% práctica, siguiendo el stack MERN. La formación fue muy intensa y me permitió perfeccionar mis conocimientos de JavaScript, React, el empleo de Node.js en el backend, el trabajo con metodologías ágiles (SCRUM) y la gestión de proyectos con Git.\n\nCon mi equipo de proyecto final de máster, decidimos desarrollar una app de domótica llamada Homehub. Se trata de una aplicación que permite controlar los electrodomésticos inteligentes del hogar desde el ordenador, tablet o móvil. El proyecto fue un reto muy gratificante que me permitió poner en práctica todo lo aprendido. Estoy muy satisfecho con el resultado y sigo aprendiendo y practicando con el proyecto en mis ratos libres.\n\nEn conclusión, fue una experiencia de aprendizaje muy valiosa que me permitió adquirir los conocimientos y las habilidades necesarias para desarrollar aplicaciones web de forma profesional.',
+					URL: 'https://nuclio.school/master-full-stack-developer/'
+				},
+				finishDate: '2023-07-01',
+				linkedCompetences: [
+					{
+						name: 'Docker',
+						type: 'technology'
+					},
+					{
+						name: 'Express',
+						type: 'technology'
+					},
+					{
+						name: 'JavaScript',
+						type: 'technology'
+					},
+					{
+						name: 'MongoDB',
+						type: 'technology'
+					},
+					{
+						name: 'NodeJS',
+						type: 'technology'
+					},
+					{
+						name: 'React',
+						type: 'technology'
+					}
+				]
+			}
+		],
+		softSkills: [
+			{
+				skill: {
+					name: 'Adaptabilidad al cambio',
+					type: 'practice'
+				}
+			},
+			{
+				skill: {
+					name: 'Autonomía en el aprendizaje',
+					type: 'practice'
+				}
+			},
+			{
+				skill: {
+					name: 'Pensamiento creativo',
+					type: 'practice'
+				}
+			}
+		]
+	},
+	careerPreferences: {
+		contact: {
+			publicProfiles: [
+				{
+					URL: 'https://www.linkedin.com/in/alvaro-fajardo-plaza-347b0218b/',
+					type: 'linkedin'
+				},
+				{
+					URL: 'https://github.com/AlvaroFajardoPlaza?tab=repositories',
+					type: 'github'
+				}
+			],
+			contactMails: ['itsalvarofajardo@gmail.com'],
+			phoneNumbers: [
+				{
+					number: '625473350',
+					countryCode: '+34'
+				}
+			]
+		},
+		preferences: {
+			preferredCompetences: [
+				{
+					name: 'Adobe CC',
+					type: 'technology'
+				},
+				{
+					name: 'Angular2+',
+					type: 'technology'
+				},
+				{
+					name: 'NodeJS',
+					type: 'technology'
+				},
+				{
+					name: 'Python',
+					type: 'technology'
+				},
+				{
+					name: 'React',
+					type: 'technology'
+				},
+				{
+					name: 'WordPress',
+					type: 'technology'
+				}
+			],
+			preferredRoles: [
+				'Brand Design',
+				'Frontend Developer',
+				'Full-stack Developer',
+				'Layout Designer / Maquetación',
+				'Lead Designer',
+				'Product Design (UI/UX)'
+			]
+		},
+		status: 'searchingActively'
+	},
+	manfredSpecificData: {
+		mainStackTechs: [
+			{
+				name: 'AngularJS',
+				type: 'technology'
+			},
+			{
+				name: 'Bootstrap',
+				type: 'technology'
+			},
+			{
+				name: 'JavaScript',
+				type: 'technology'
+			},
+			{
+				name: 'React',
+				type: 'technology'
+			},
+			{
+				name: 'WordPress',
+				type: 'technology'
+			}
+		],
+		desiredJobDescription:
+			'Me gusta encontrar el equilibrio entre el diseño y la tecnología, para lograr soluciones novedosas y adaptadas a los requerimientos de los usuarios finales.\n\nMi entorno de trabajo ideal es un equipo donde haya pasión por hacer un buen trabajo, aprendizaje continuo e interés por crecer, mejorar y compartir el conocimiento obtenido.\n\nConsidero que la flexibilidad es importante para la productividad y el bienestar, aunque abogo por un trabajo híbrido, que permita flexibilizar los horarios para poder compaginar vida personal y profesional.\n\nPor otro lado, la mentoría y tener un plan de crecimiento dentro de la empresa y del proyecto. Este tipo de entorno me permitiría crecer como profesional y alcanzar mis objetivos.',
+		goodPractices:
+			'Antes de entregar un trabajo, intento compartirlo con otros desarrolladores para obtener su feedback. Esto me ayuda a identificar errores y mejorar mi trabajo.\n\nTambién considero que es importante refactorizar el código regularmente para mantenerlo limpio y eficiente y encontrar mejores formas de presentarlo ante el resto.\n\nPor último, veo importante estar siempre aprendiendo y mejorando. Estar atento a nuevas tecnologías y tendencias.',
+		projects: [
+			{
+				name: 'HOMEHUB'
+			}
+		]
+	}
+};

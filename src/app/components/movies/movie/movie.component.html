@@ -14,9 +14,11 @@
 				<h6 class="lead">| {{ movie.year }} |</h6>
 				<br />
 				<p class="lead fs-6">{{ movie.summary }}</p>
-				<br /><br />
-				<h4>Comments:</h4>
-				<p class="fs-6">{{ movie.comment }}</p>
+				<!-- <h4>Comments:</h4>
+				<p class="fs-6">{{ movie.comment }}</p> -->
+				<div>
+					<app-comments-list></app-comments-list>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -18,4 +18,19 @@ export class CommentsService {
 			`${environment.baseUrl}/${this.prefix}`
 		);
 	}
+
+	findById(id: number): Observable<Array<Comment>> {
+		return this._http.get<Array<Comment>>(
+			`${environment.baseUrl}/${this.prefix}/${id}`
+		);
+	}
+
+	// Post de un nuevo comentario
+	post(commentValues: Comment): Observable<Comment> {
+		console.log('Este es nuestro nuevo comentario: ', commentValues);
+		return this._http.post<Comment>(
+			`${environment.baseUrl}/${this.prefix}`,
+			commentValues
+		);
+	}
 }

@@ -9,6 +9,7 @@ import {
 	switchMap,
 	tap
 } from 'rxjs';
+import { LoginResponse } from '../models/LoginResponse.interface';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -83,10 +84,4 @@ export class AuthService {
 		// navigate to login
 		return this._router.navigate(['login']);
 	}
-}
-
-interface LoginResponse {
-	login: boolean;
-	token: string;
-	user: any;
 }

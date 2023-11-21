@@ -1,0 +1,48 @@
+<h5 class="lead">Escribe lo que opinas sobre esta película:</h5>
+
+<form class="card p-3" [formGroup]="newCommentForm" (ngSubmit)="OnSubmit()">
+	<div class="mb-4 mt-3">
+		<label for="floatingTextarea" class="fs-6 mb-2"
+			>Tu comentario:<span class="text-danger"> *</span></label
+		>
+		<textarea
+			id="floatingTextarea"
+			placeholder="¿Recomendarías esta película al resto de usuarios?"
+			type="text-area"
+			class="form-control"
+			formControlName="comment"
+			required
+		></textarea>
+		<div
+			class="alert alert-danger mt-2"
+			*ngIf="
+				newCommentForm.get('comment').touched &&
+				newCommentForm.get('comment').hasError('required')
+			"
+		>
+			Tienes que escribir un comentario
+		</div>
+	</div>
+	<div class="mb-4">
+		<select class="form-select" formControlName="rating">
+			<option value="" selected disabled>
+				Puntuación que le das a esta película
+			</option>
+			<option *ngFor="let rating of ratings" [value]="rating.value">
+				{{ rating.name }}
+			</option>
+		</select>
+	</div>
+	<div class="mb-3">
+		<button type="submit" class="btn btn-primary shadow-sm">
+			Comentar
+		</button>
+	</div>
+</form>
+<p class="alerta-comentario text-danger mt-2 ms-2">
+	* Tu comentario será revisado, así que recuerda ser respetuoso con el resto
+	de usuarios. De incumplir con las normas de la comunidad, el comentario será
+	retirado.
+</p>
+
+<!-- <pre>{{ userLogged | async | json }}</pre> -->

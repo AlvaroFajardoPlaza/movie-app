@@ -2,7 +2,7 @@
 	<div class="container p-5" *ngIf="movie$ | async as movie">
 		<!-- Queremos una estructura de dos columnas -->
 		<div class="row d-flex justify-content-start gap-3">
-			<div class="col-md-4 col-sm-12">
+			<div class="col col-md-4 col-sm-12">
 				<img
 					src="{{ movie.image }}"
 					class="poster-movie-image shadow"
@@ -16,10 +16,10 @@
 				<p class="lead fs-6">{{ movie.summary }}</p>
 				<!-- <h4>Comments:</h4>
 				<p class="fs-6">{{ movie.comment }}</p> -->
-				<div>
-					<app-comments-list></app-comments-list>
-				</div>
 			</div>
+		</div>
+		<div class="row mt-4">
+			<app-comments-list></app-comments-list>
 		</div>
 	</div>
 </div>

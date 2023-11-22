@@ -1,14 +1,12 @@
 <div class="background-page">
 	<div class="container">
-		<h1 class="text-center pt-3">Explora tus películas</h1>
-
-		<p class="text-center lead">
-			Listamos las películas que tenemos en nuestra base de datos en
-			MYSQL.
-		</p>
+		<h1 class="text-center pt-5">Explora el listado de películas</h1>
 
 		<div class="d-flex justify-content-center gap-2 mt-3 mb-3">
-			<h4 class="lead">Añade una nueva película:</h4>
+			<h4 class="lead">
+				Si tienes el rol de administrador dentro de la aplicación,
+				puedes añadir una nueva película:
+			</h4>
 			<button
 				class="btn btn-sm btn-secondary rounded-pill shadow"
 				(click)="AddNewMovie()"
@@ -16,29 +14,6 @@
 				Añadir
 			</button>
 		</div>
-
-		<!-- ESTE CONTENEDOR TIENE QUE RENDERIZAR UN LOADER CUANDO ESTEMOS PIDIENDO LA DATA AL BACKEND -->
-
-		<!-- PAGINADOR -->
-		<!-- <nav class="mt-5" aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item disabled">
-					<a
-						class="page-link"
-						href="#"
-						tabindex="-1"
-						aria-disabled="true"
-						>Previous</a
-					>
-				</li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item">
-					<a class="page-link" href="#">Next</a>
-				</li>
-			</ul>
-		</nav> -->
 
 		<ng-container *ngIf="!movies">
 			<div>
@@ -61,7 +36,7 @@
 					</div>
 
 					<div
-						class="card-body mt-2 flex-column justify-content-start"
+						class="card-body mt-2 d-flex flex-column justify-content-start"
 					>
 						<h4 class="card-title fw-bold">{{ movie.title }}</h4>
 						<h6 class="lead fs-6 text-green">
@@ -75,14 +50,24 @@
 						<p class="card-text card__preview-text fs-6 fw-light">
 							{{ movie.comment }}
 						</p> -->
+						<div class="d-flex flex-column align-self-start">
+							<button
+								class="btn btn-sm align-self-start btn-outline-dark rounded-pill"
+								(click)="MovieInfo(movie.id)"
+							>
+								read more
+							</button>
+						</div>
 					</div>
+
+					<!-- SOLO EL ROL DE ADMIN PUEDE BORRAR LAS PELÍCULAS -->
+					<!-- ESTO DEBERÍA SER UN NG-TEMPLATE QUE SE MUESTRE CHEQUEANDO EL
+					ROL DEL USER$ -->
 					<div class="card-footer d-flex justify-content-start gap-2">
-						<button
-							class="btn btn-sm btn-outline-dark rounded-pill"
-							(click)="MovieInfo(movie.id)"
-						>
-							read more
-						</button>
+						<p style="font-size: 0.65rem">
+							Tenemos que chequear el usuario. Si es admin, puede
+							eliminar
+						</p>
 						<button
 							class="btn btn-sm btn-outline-danger rounded-pill"
 							(click)="Delete(movie.id)"

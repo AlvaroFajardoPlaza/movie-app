@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, Subscription, filter, map, switchMap } from 'rxjs';
 import { Movie } from 'src/app/models/movie.interface';
+import { MovieGenre } from 'src/app/models/movie-genre';
 import { MoviesService } from 'src/app/services/movies.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class MovieComponent implements OnInit, OnDestroy {
 	private _activatedRoute = inject(ActivatedRoute);
 
 	movie: Movie | any;
+	genres: Array<MovieGenre> | any = [];
 
 	// De la url recibimos el valor del id en un string. empleamos snapshot para coger el valor estático de la url y evitar que cambie y luego el método paramMap "mapeo de parámetros de la url". Después hacemos un get
 	id: string | null = this._activatedRoute.snapshot.paramMap.get('id');
@@ -29,6 +31,10 @@ export class MovieComponent implements OnInit, OnDestroy {
 		switchMap((id: string) => this.movieService.findById(+id))
 	);
 
+	movieGenres$: Observable<Array<MovieGenre>> = this.movieService.getGenres(
+		+this.id
+	);
+
 	subscription: Subscription;
 
 	constructor(private movieService: MoviesService) {}
@@ -42,7 +48,13 @@ export class MovieComponent implements OnInit, OnDestroy {
 					console.log('Estos son los datos de la película: ', movie);
 				});
 		}
+		this.subscription = this.movieGenres$.subscribe((genres) => {
+			this.genres = genres;
+			console.log('Estamos trayendo los generos de la película?', genres);
+		});
 	}
+
+	// Tenemos que generar la llamada que nos trae el rating total de la película
 
 	ngOnDestroy(): void {
 		this.subscription.unsubscribe();

@@ -17,19 +17,19 @@ export class HorizontalBarComponent implements OnInit {
 	//Creamos nuestro listado de menuItems
 	MenuItems: Array<MenuItem> = [
 		{
-			label: 'explore',
+			label: 'explorar películas',
 			route: 'explore-movies'
 		},
 		{
-			label: 'features',
+			label: 'implementaciones',
 			route: 'features'
 		},
+		// {
+		// 	label: 'pricing',
+		// 	route: 'pricing'
+		// },
 		{
-			label: 'pricing',
-			route: 'pricing'
-		},
-		{
-			label: 'about me',
+			label: 'el equipo',
 			route: 'about-me'
 		}
 	];

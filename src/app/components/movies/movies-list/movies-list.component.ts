@@ -29,14 +29,6 @@ export class MoviesListComponent {
 		});
 	}
 
-	// Primer componente lista de películas
-	// ngOnInit(): void {
-	// 	this.movieService.getAll().subscribe((movies: any) => {
-	// 		this.movies = movies;
-	// 		console.log('recibimos las películas? ', movies);
-	// 	});
-	// }
-
 	// Ruta para navegar a los datos de 1 película
 	MovieInfo(id: Number) {
 		this._router.navigate([/movies/, id]);

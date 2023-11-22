@@ -4,6 +4,7 @@ import { Movie } from '../models/movie.interface';
 import { Observable, firstValueFrom } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
+import { MovieGenre } from '../models/movie-genre';
 
 @Injectable({
 	providedIn: 'root'
@@ -24,6 +25,13 @@ export class MoviesService {
 	findById(id: number): Observable<Movie> {
 		return this.http.get<Movie>(
 			`${environment.baseUrl}/${this.prefix}/${id}`
+		);
+	}
+
+	// Llamada a los géneros de una película por su id
+	getGenres(id: number): Observable<Array<MovieGenre>> {
+		return this.http.get<Array<MovieGenre>>(
+			`${environment.baseUrl}/${this.prefix}/${id}/genres`
 		);
 	}
 

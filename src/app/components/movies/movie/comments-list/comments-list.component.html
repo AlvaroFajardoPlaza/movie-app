@@ -1,9 +1,18 @@
 <div class="row mt-5 d-flex gap-4">
 	<div class="col col-sm-12 col-md-4">
-		<app-new-comment-form></app-new-comment-form>
+		<app-new-comment-form
+			(submit)="onNewCommentSubmit()"
+		></app-new-comment-form>
 	</div>
 
 	<div class="col">
+		<div class="d-flex gap-3 mt3">
+			<h6>
+				¿Hemos recibido el rating y se ha hecho la media correctamente?
+			</h6>
+			<h6 class="fw-bold">{{ averageMovieRating }}</h6>
+		</div>
+
 		<h5 class="lead">Sección de comentarios:</h5>
 		<div class="d-flex flex-column justify-content-start gap-2">
 			<div

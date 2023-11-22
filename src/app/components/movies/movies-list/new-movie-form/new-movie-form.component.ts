@@ -32,19 +32,26 @@ export class NewMovieFormComponent {
 				[
 					Validators.required,
 					Validators.minLength(25),
-					Validators.maxLength(200)
+					Validators.maxLength(500)
 				]
 			],
 			comment: [null, []], // En la base de datos modificaste las características de este campo para que pudiera ser null
 			image: [null, []], // Idem a arriba...
 			genre1: [null, []],
-			genre2: [null, []],
+			// genre2: [null, []],
 			cast: [null, []],
 			director: [null, []]
 		});
 	}
 
 	async onSubmit() {
+		// Verifica si el campo de imagen está vacío y asigna una URL predeterminada si es así
+		if (!this.newMovieForm.value.image) {
+			this.newMovieForm.patchValue({
+				image: 'https://ih1.redbubble.net/image.2696236726.2233/flat,750x,075,f-pad,750x1000,f8f8f8.jpg'
+			});
+		}
+
 		const response = await firstValueFrom(
 			this._movieService.post(this.newMovieForm.value)
 		);

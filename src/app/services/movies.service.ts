@@ -35,6 +35,13 @@ export class MoviesService {
 		);
 	}
 
+	// Esta llamada la utilizaremos para mostrar los géneros en el newMovieForm
+	getAllGenres(): Observable<Array<MovieGenre>> {
+		return this.http.get<Array<MovieGenre>>(
+			`${environment.baseUrl}/${this.prefix}/genres`
+		);
+	}
+
 	// Añadimos una nueva película y solicitamos una Promesa
 	post(movieValues: Movie): Observable<Movie> {
 		console.log('Estos son los valores del formulario: ', movieValues);

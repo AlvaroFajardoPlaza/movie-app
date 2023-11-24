@@ -17,6 +17,7 @@ import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { LoginComponent } from './components/registration/login/login.component';
 import { RegisterComponent } from './components/registration/register/register.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // Export this function
 export function playerFactory(): any {
@@ -41,7 +42,8 @@ export function playerFactory(): any {
 		HttpClientModule,
 		LottieModule.forRoot({ player: playerFactory }),
 		FormsModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		FontAwesomeModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

@@ -27,9 +27,6 @@ export class CommentsListComponent implements OnInit {
 	);
 
 	ngOnInit(): void {
-		console.log(
-			'Tenemos que conseguir el total de ratings y hacer la media entre el número total de comentarios que haya de esta película'
-		);
 		// Calcula la media cuando la lista de comentarios se actualiza
 		this.commentsList$.subscribe((comments) => {
 			const ratings = comments.map((comment) => comment.rating); // Extrae los ratings de los comentarios

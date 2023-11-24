@@ -1,81 +1,83 @@
 <div class="container">
-	<form
-		class="bg-secondary p-3 m-3"
-		[formGroup]="newMovieForm"
-		(ngSubmit)="onSubmit()"
-	>
-		<h4 class="text-center lead fs-2">Añade una nueva película</h4>
+	<form class="p-3 m-3" [formGroup]="newMovieForm" (ngSubmit)="onSubmit()">
+		<h4 class="text-center lead fs-2">
+			Añade una nueva película a MovieReview
+		</h4>
 		<!-- TITLE -->
-		<div class="mb-3">
-			<label class="lead fs-6 mb-2"
-				>Title<span class="text-danger"> *</span></label
-			>
-			<input
-				type="text"
-				class="form-control"
-				formControlName="title"
-				required
-			/>
-			<div
-				class="alert alert-danger mt-2"
-				*ngIf="
-					newMovieForm.get('title').touched &&
-					newMovieForm.get('title').hasError('required')
-				"
-			>
-				Este campo es requerido
+		<div class="row d-flex justify-content-between">
+			<div class="col mb-3">
+				<label class="lead fs-6 mb-2"
+					>Título<span class="text-danger"> *</span></label
+				>
+				<input
+					type="text"
+					class="form-control"
+					formControlName="title"
+					required
+				/>
+				<div
+					class="alert alert-danger mt-2"
+					*ngIf="
+						newMovieForm.get('title').touched &&
+						newMovieForm.get('title').hasError('required')
+					"
+				>
+					Este campo es requerido
+				</div>
+				<div
+					class="alert alert-danger mt-2"
+					*ngIf="
+						newMovieForm.get('title').touched &&
+						newMovieForm.get('title').hasError('minlength')
+					"
+				>
+					El título es demasiado corto!
+				</div>
+				<div
+					class="alert alert-danger mt-2"
+					*ngIf="
+						newMovieForm.get('title').touched &&
+						newMovieForm.get('title').hasError('maxlength')
+					"
+				>
+					El título es demasiado largo!
+				</div>
 			</div>
-			<div
-				class="alert alert-danger mt-2"
-				*ngIf="
-					newMovieForm.get('title').touched &&
-					newMovieForm.get('title').hasError('minlength')
-				"
-			>
-				El título es demasiado corto!
-			</div>
-			<div
-				class="alert alert-danger mt-2"
-				*ngIf="
-					newMovieForm.get('title').touched &&
-					newMovieForm.get('title').hasError('maxlength')
-				"
-			>
-				El título es demasiado largo!
+			<!-- YEAR PLANTEADO CON UN SELECT -->
+			<div class="col col-auto mb-3">
+				<label class="lead fs-6 mb-2"
+					>Año<span class="text-danger"> *</span></label
+				>
+				<select class="form-select" formControlName="year">
+					<option value="" selected disabled>
+						Año de estreno de la película
+					</option>
+					<option *ngFor="let year of years">{{ year }}</option>
+				</select>
+				<div
+					*ngIf="
+						newMovieForm.get('year').touched &&
+						newMovieForm.get('year').hasError('required')
+					"
+					class="alert alert-danger mt-2"
+				>
+					Este campo es requerido.
+				</div>
 			</div>
 		</div>
-		<!-- YEAR -->
-		<div class="mb-3">
-			<label class="lead fs-6 mb-2"
-				>Year<span class="text-danger"> *</span></label
-			>
-			<input
-				type="number"
-				class="form-control"
-				formControlName="year"
-				required
-			/>
-			<div
-				*ngIf="
-					newMovieForm.get('year').touched &&
-					newMovieForm.get('year').hasError('required')
-				"
-				class="alert alert-danger mt-2"
-			>
-				Este campo es requerido.
-			</div>
-		</div>
+
 		<!-- SUMMARY -->
 		<div class="mb-3">
 			<label class="lead fs-6 mb-2"
-				>Summary<span class="text-danger"> *</span></label
+				>Sinopsis<span class="text-danger"> *</span></label
 			>
-			<input
-				type="text-area"
+			<textarea
+				type="text"
+				placeholder="Escribe la sinopsis de esta película"
 				class="form-control"
 				formControlName="summary"
 				required
-			/>
+			></textarea>
 			<div
 				class="alert alert-danger mt-2"
 				*ngIf="
@@ -105,80 +107,88 @@
 			</div>
 		</div>
 
-		<!-- COMMENT -->
-		<div class="mb-3">
-			<label class="lead fs-6 mb-2">Comment</label>
-			<input
-				type="text-area"
-				class="form-control"
-				formControlName="comment"
-				required
-			/>
-		</div>
-
 		<!-- IMAGE -->
-		<div class="mb-3">
-			<label class="lead fs-6 mb-2"
-				>Image<span class="text-light">
-					(acepta una url de la imagen de la película)</span
-				></label
-			>
-			<input
-				type="text"
-				class="form-control"
-				formControlName="image"
-				required
-			/>
-		</div>
+		<div class="row d-flex justify-content-between">
+			<div class="col mb-3">
+				<label class="lead fs-6 mb-2"
+					>Imagen<span class="text-info">
+						(url de la imagen)</span
+					></label
+				>
+				<input
+					type="text"
+					class="form-control"
+					formControlName="image"
+					required
+				/>
+			</div>
 
-		<!-- GENRE1 -->
-		<div class="mb-3">
-			<label class="lead fs-6 mb-2">Genre 1</label>
-			<input
-				type="number"
-				class="form-control"
-				formControlName="genre1"
-				required
-			/>
-		</div>
+			<!-- GENRES -->
+			<div class="col col-auto mb-3">
+				<label class="lead fs-6 mb-2">Género</label>
+				<select
+					class="form-select"
+					formControlName="genres"
+					multiple="true"
+				>
+					<option value="" selected disabled>
+						¿Cuál es el género de esta película?
+					</option>
+					<option
+						*ngFor="let genre of genres$ | async"
+						[value]="genre.genre"
+					>
+						{{ genre.genre }}
+					</option>
+				</select>
+			</div>
 
-		<!-- GENRE2 -->
-		<div class="mb-3">
-			<label class="lead fs-6 mb-2">Genre 2</label>
-			<input
-				type="number"
-				class="form-control"
-				formControlName="genre2"
-				required
-			/>
+			<!-- GENRE2 -->
+			<!-- <div class="mb-3">
+				<label class="lead fs-6 mb-2">Genre 2</label>
+				<input
+					type="number"
+					class="form-control"
+					formControlName="genre2"
+					required
+				/>
+			</div> -->
 		</div>
 
 		<!-- CAST -->
-		<div class="mb-3">
-			<label class="lead fs-6 mb-2">Cast</label>
-			<input
-				type="text-area"
-				class="form-control"
-				formControlName="cast"
-				required
-			/>
-		</div>
+		<div class="row d-flex gap-2">
+			<div class="col col-sm-5 mb-3">
+				<label class="lead fs-6 mb-2">Cast</label>
+				<input
+					type="text-area"
+					class="form-control"
+					formControlName="cast"
+					required
+				/>
+			</div>
 
-		<!-- DIRECTOR -->
-		<div class="mb-3">
-			<label class="lead fs-6 mb-2">Director</label>
-			<input
-				type="text-area"
-				class="form-control"
-				formControlName="director"
-				required
-			/>
+			<!-- DIRECTOR -->
+			<div class="col col-sm-5 mb-3">
+				<label class="lead fs-6 mb-2">Director</label>
+				<input
+					type="text-area"
+					class="form-control"
+					formControlName="director"
+					required
+				/>
+			</div>
 		</div>
 
 		<!-- BOTÓN DE SUBMIT -->
-		<div class="mb-3 text-center">
+		<div class="d-flex justify-content-center gap-2 mt-3 mb-3">
 			<button type="submit" class="btn btn-primary shadow-sm">
 				Añadir película
+			</button>
+			<button
+				(click)="navigateToExplore()"
+				class="btn btn-secondary shadow-sm"
+			>
+				Cancelar
 			</button>
 		</div>
 	</form>

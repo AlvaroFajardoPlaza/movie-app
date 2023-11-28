@@ -2,29 +2,55 @@
 	<div class="container">
 		<h1 class="text-center pt-5">Explora el listado de películas</h1>
 
-		<div class="d-flex justify-content-center gap-2 mt-3 mb-3">
-			<h4 class="lead">
-				Si tienes el rol de administrador dentro de la aplicación,
-				puedes añadir una nueva película:
-			</h4>
-			<button
-				class="btn btn-sm btn-secondary rounded-pill shadow"
-				(click)="AddNewMovie()"
-			>
-				Añadir
-			</button>
-		</div>
+		<pre>{{ userRole$ | async | json }}</pre>
 
-		<ng-container *ngIf="!movies">
+		<ng-container *ngIf="(userRole$ | async)?.[0].role === 'admin'">
+			<div class="d-flex justify-content-center gap-2 mt-3 mb-3">
+				<h4 class="lead">
+					Si tienes el rol de administrador dentro de la aplicación,
+					puedes añadir una nueva película:
+				</h4>
+				<button
+					class="btn btn-sm btn-secondary rounded-pill shadow"
+					(click)="AddNewMovie()"
+				>
+					Añadir
+				</button>
+			</div>
+		</ng-container>
+
+		<ng-container *ngIf="!moviesList$">
 			<div>
 				<h4 class="mt-5">Loading</h4>
 			</div>
 		</ng-container>
 
+		<!-- NUESTRA SEARCH BAR -->
+		<form
+			class="d-flex justify-content-center gap-2 mb-4"
+			[formGroup]="searchMovieForm"
+			(ngSubmit)="FilterResults(filter.value)"
+		>
+			<input
+				#filter
+				type="text"
+				class="form-control rounded-pill"
+				style="width: 20rem"
+				placeholder="Introduce el título de una película"
+			/>
+			<button
+				type="submit"
+				class="btn btn-sm btn-outline-dark rounded-pill"
+				((keyup))="FilterResults(filter.value)"
+			>
+				Buscar
+			</button>
+		</form>
+
 		<div
 			class="section d-flex justify-content-center flex-wrap gap-3 pt-4 pb-5"
 		>
-			<ng-container *ngFor="let movie of movies">
+			<ng-container *ngFor="let movie of filteredMovieList$ | async">
 				<div class="card movieCard shadow-sm">
 					<div class="card-head">
 						<img
@@ -63,7 +89,10 @@
 					<!-- SOLO EL ROL DE ADMIN PUEDE BORRAR LAS PELÍCULAS -->
 					<!-- ESTO DEBERÍA SER UN NG-TEMPLATE QUE SE MUESTRE CHEQUEANDO EL
 					ROL DEL USER$ -->
-					<div class="card-footer d-flex justify-content-start gap-2">
+					<ng-container
+						*ngIf="(userRole$ | async)?.[0]?.role === 'admin'"
+						class="card-footer d-flex justify-content-start gap-2"
+					>
 						<p style="font-size: 0.65rem">
 							Tenemos que chequear el usuario. Si es admin, puede
 							eliminar
@@ -74,7 +103,7 @@
 						>
 							delete movie
 						</button>
-					</div>
+					</ng-container>
 				</div>
 			</ng-container>
 		</div>

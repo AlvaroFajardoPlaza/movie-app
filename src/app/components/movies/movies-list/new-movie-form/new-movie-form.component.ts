@@ -16,20 +16,21 @@ export class NewMovieFormComponent implements OnInit {
 
 	newMovieForm: FormGroup | any;
 
-	genres: any[] = [
-		{ name: 'acción', value: 1 },
-		{ name: 'aventura', value: 2 },
-		{ name: 'animación', value: 3 },
-		{ name: 'ciencia-ficción', value: 4 },
-		{ name: 'comedia', value: 5 },
-		{ name: 'documental', value: 6 },
-		{ name: 'drama', value: 7 },
-		{ name: 'fantasía', value: 8 },
-		{ name: 'musical', value: 9 },
-		{ name: 'terror', value: 10 },
-		{ name: 'suspense', value: 10 }
-	];
+	// genres: any[] = [
+	// 	{ name: 'acción', value: 1 },
+	// 	{ name: 'aventura', value: 2 },
+	// 	{ name: 'animación', value: 3 },
+	// 	{ name: 'ciencia-ficción', value: 4 },
+	// 	{ name: 'comedia', value: 5 },
+	// 	{ name: 'documental', value: 6 },
+	// 	{ name: 'drama', value: 7 },
+	// 	{ name: 'fantasía', value: 8 },
+	// 	{ name: 'musical', value: 9 },
+	// 	{ name: 'terror', value: 10 },
+	// 	{ name: 'suspense', value: 10 }
+	// ];
 
+	// Realizamos una llamada a todos los géneros que tenemos guardados en la BBDD y lo tratamos como observable.
 	genres$ = this._movieService.getAllGenres();
 
 	defaultGenre: number = 1;

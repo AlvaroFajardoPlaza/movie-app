@@ -16,7 +16,7 @@
 		<h5 class="lead">Sección de comentarios:</h5>
 		<div class="d-flex flex-column justify-content-start gap-2">
 			<div
-				*ngFor="let element of commentsList$ | async"
+				*ngFor="let comment of commentsList$ | async"
 				class="card shadow"
 			>
 				<div class="d-flex justify-content-start gap-3 mt-3 ms-3">
@@ -26,15 +26,15 @@
 						alt="default-user-icon"
 					/>
 					<p class="lead fs-5 fw-bold text-primary mt-2">
-						{{ element.user }}
+						{{ comment.user }}
 					</p>
 					<p class="text-success fw-bold fs-5 mt-2">
-						{{ element.rating }}/5
+						{{ comment.rating }}/5
 					</p>
 				</div>
 				<div class="mb-3">
 					<p class="fs-6 text-secondar ms-3 me-2 mt-3">
-						{{ element.comment }}
+						{{ comment.comment }}
 					</p>
 				</div>
 			</div>

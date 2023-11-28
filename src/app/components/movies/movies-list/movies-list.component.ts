@@ -2,7 +2,17 @@ import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MoviesService } from 'src/app/services/movies.service';
 import { Movie } from 'src/app/models/movie.interface';
-import { Observable, Subscription } from 'rxjs';
+import {
+	Observable,
+	Subscription,
+	catchError,
+	filter,
+	map,
+	switchMap
+} from 'rxjs';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserRole } from 'src/app/models/UserRole.interface';
 
 @Component({
 	selector: 'app-movies-list',
@@ -10,16 +20,38 @@ import { Observable, Subscription } from 'rxjs';
 	styleUrls: ['./movies-list.component.scss']
 })
 export class MoviesListComponent {
-	movies: Array<Movie> = [];
-	movie: Movie | any;
-	subscription: Subscription; // Esta subscription nos es útil al manejar el ciclo de vida del componente.
-
 	// Al inyectar los servicios, no es necesario emplear el constructor del componente
 	private _router = inject(Router);
 	private _activatedRouter = inject(ActivatedRoute);
 	private _movieService = inject(MoviesService);
+	private _authSvc = inject(AuthService);
+	private _formBuilder = inject(FormBuilder);
+
+	movies: Array<Movie> = [];
+	movie: Movie | any;
+	subscription: Subscription; // Esta subscription nos es útil al manejar el ciclo de vida del componente.
 
 	moviesList$: Observable<Array<Movie>> = this._movieService.getAll();
+
+	searchMovieForm: FormGroup | any;
+	filteredMovieList$: Observable<Array<Movie>> = this.moviesList$;
+
+	userLogged$ = this._authSvc.user$;
+	// Conseguimos el rol del usuario
+	userRole$: Observable<Array<UserRole>> = this._authSvc.user$.pipe(
+		filter((id: number) => !!id), // Filtra valores nulos o indefinidos
+		switchMap((id) => this._authSvc.getRole(id)) // Creo que el error viene del tipo de dato que mandamos...
+	);
+
+	constructor() {
+		this.searchMovieForm = this._formBuilder.group({
+			text: [null, Validators.required]
+		});
+
+		this.searchMovieForm.patchValue({
+			text: 'amanece'
+		});
+	}
 
 	// Esperamos a que cargue el componente antes de iniciar el Observable
 	ngOnInit() {
@@ -27,9 +59,35 @@ export class MoviesListComponent {
 			this.movies = movies;
 			console.log('Listado de películas: ', movies);
 		});
+
+		// Tenemos un usuario loggeado? Nos subscribimos al observable
+		this.userLogged$.subscribe((user) => {
+			console.log('El usuario está loggeado?', user);
+		});
+		this.userRole$.subscribe((role) => {
+			console.log(role);
+		});
 	}
 
-	// Ruta para navegar a los datos de 1 película
+	// Esta es la función que nos filtrará los resultados de nuestra lista
+	FilterResults(text: string) {
+		console.log('Tenemos algo en el input?', text);
+		if (!text) {
+			console.log('No se ha introducido nada en el input');
+			this.filteredMovieList$ = this.moviesList$;
+			return;
+		}
+		// Tenemos que plantear un filter dentro del observable
+		this.filteredMovieList$ = this.moviesList$.pipe(
+			map((movies) =>
+				movies.filter((movie: Movie) =>
+					movie.title.toLowerCase().includes(text.toLowerCase())
+				)
+			)
+		);
+	}
+
+	// Rutas de navegación dentro del componente
 	MovieInfo(id: Number) {
 		this._router.navigate([/movies/, id]);
 	}
@@ -38,6 +96,7 @@ export class MoviesListComponent {
 		this._router.navigate(['explore-movies/add']);
 	}
 
+	// Eliminando una película
 	Delete(id: Number) {
 		console.log('El id de la película es: ', id);
 

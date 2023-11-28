@@ -11,6 +11,7 @@ import {
 } from 'rxjs';
 import { LoginResponse } from '../models/LoginResponse.interface';
 import { environment } from 'src/environments/environment';
+import { UserRole } from '../models/UserRole.interface';
 
 @Injectable({
 	providedIn: 'root'
@@ -28,6 +29,16 @@ export class AuthService {
 				return of(null);
 			} else {
 				return this.me();
+			}
+		})
+	);
+
+	userRole$: Observable<Array<UserRole>> = this.user$.pipe(
+		switchMap((id) => {
+			if (!id) {
+				return of(null);
+			} else {
+				return this.getRole(+id);
 			}
 		})
 	);
@@ -72,6 +83,12 @@ export class AuthService {
 			{
 				token: localStorage.getItem('token')
 			}
+		);
+	}
+
+	getRole(id: number): Observable<any> {
+		return this._http.get<any>(
+			`${environment.baseUrl}/${this.prefix}/role/${id}`
 		);
 	}
 

@@ -68,7 +68,5 @@ export class NewCommentFormComponent implements OnInit {
 			'La respuesta al submit: ',
 			response
 		);
-
-		// Habría que considerar un hot observable o refrescar la página
 	}
 }

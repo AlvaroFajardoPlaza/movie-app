@@ -28,17 +28,19 @@
 					</button>
 				</div>
 
-				<h6 class="lead fw-bold mt-5">
+				<!-- AQUÍ TENEMOS QUE RECIBIR EL VALOR DEL OUTPUT -->
+				<h3 class="lead fw-bold mt-5">
 					Valoración media según los usuarios:
-				</h6>
-				<p>
-					Aquí tenemos que incluir una media total de todas las
-					valoraciones que los usuarios han hecho de esta película.
-				</p>
+				</h3>
+				<div class="content lead">
+					La valoración media es: {{ rating }}
+				</div>
 			</div>
 		</div>
 		<div class="row mt-4">
-			<app-comments-list></app-comments-list>
+			<app-comments-list
+				(sendRatingToMovieComponent)="gettingRating($event)"
+			></app-comments-list>
 		</div>
 	</div>
 </div>

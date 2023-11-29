@@ -4,14 +4,16 @@ import { Router } from '@angular/router';
 import {
 	BehaviorSubject,
 	Observable,
+	filter,
 	firstValueFrom,
 	of,
 	switchMap,
 	tap
 } from 'rxjs';
-import { LoginResponse } from '../models/LoginResponse.interface';
 import { environment } from 'src/environments/environment';
-import { UserRole } from '../models/UserRole.interface';
+import { LoginResponse } from '../models/LoginResponse.interface';
+import { User } from '../models/user.interface';
+import { UserRole } from '../models/user-role';
 
 @Injectable({
 	providedIn: 'root'
@@ -23,24 +25,16 @@ export class AuthService {
 
 	token$ = new BehaviorSubject<string>(localStorage.getItem('token') ?? null);
 
+	// user$ = new BehaviorSubject<User>(null);
+	// userRole$ = new BehaviorSubject<UserRole>(null);
+
 	user$: Observable<any> = this.token$.pipe(
-		switchMap((token) => {
-			if (!token) {
-				return of(null);
-			} else {
-				return this.me();
-			}
-		})
+		switchMap((token) => (!token ? of(null) : this.me()))
 	);
 
-	userRole$: Observable<Array<UserRole>> = this.user$.pipe(
-		switchMap((id) => {
-			if (!id) {
-				return of(null);
-			} else {
-				return this.getRole(+id);
-			}
-		})
+	userRole$: Observable<UserRole> = this.user$.pipe(
+		filter((user: User) => !!user?.id),
+		switchMap((user: User) => this.getRole(user.id))
 	);
 
 	// Registro de usuarios
@@ -77,6 +71,7 @@ export class AuthService {
 		);
 	}
 
+	// Desde el backend, esta llamada verifica el token y extrae los datos del usuario
 	me(): Observable<any> {
 		return this._http.post<any>(
 			`${environment.baseUrl}/${this.prefix}/me`,

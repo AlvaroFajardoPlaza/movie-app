@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { Comment } from 'src/app/models/comment.interfaze';
 import { CommentsService } from 'src/app/services/comments.service';
 import { BehaviorSubject, Observable, Subscription, switchMap } from 'rxjs';
@@ -26,6 +26,14 @@ export class CommentsListComponent implements OnInit {
 		switchMap((_) => this._commentsService.findById(this.movieId))
 	);
 
+	// Mandamos el rating al componente de nivel superior
+	@Output() sendRatingToMovieComponent: EventEmitter<number> =
+		new EventEmitter<number>();
+
+	sendRating(): void {
+		this.sendRatingToMovieComponent.emit(this.averageMovieRating);
+	}
+
 	ngOnInit(): void {
 		// Calcula la media cuando la lista de comentarios se actualiza
 		this.commentsList$.subscribe((comments) => {
@@ -38,6 +46,7 @@ export class CommentsListComponent implements OnInit {
 			const result =
 				numberOfComments > 0 ? totalRatings / numberOfComments : null; // Calcula la media o asigna null si no hay comentarios
 			this.averageMovieRating = Math.round(result * 100) / 100;
+			console.log(this.averageMovieRating);
 		});
 	}
 

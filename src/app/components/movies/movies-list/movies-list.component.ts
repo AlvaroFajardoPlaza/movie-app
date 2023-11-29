@@ -8,11 +8,13 @@ import {
 	catchError,
 	filter,
 	map,
-	switchMap
+	switchMap,
+	tap
 } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { UserRole } from 'src/app/models/UserRole.interface';
+import { UserRole } from 'src/app/models/user-role';
+import { User } from 'src/app/models/user.interface';
 
 @Component({
 	selector: 'app-movies-list',
@@ -37,11 +39,9 @@ export class MoviesListComponent {
 	filteredMovieList$: Observable<Array<Movie>> = this.moviesList$;
 
 	userLogged$ = this._authSvc.user$;
+
 	// Conseguimos el rol del usuario
-	userRole$: Observable<Array<UserRole>> = this._authSvc.user$.pipe(
-		filter((id: number) => !!id), // Filtra valores nulos o indefinidos
-		switchMap((id) => this._authSvc.getRole(id)) // Creo que el error viene del tipo de dato que mandamos...
-	);
+	userRole$: Observable<UserRole> = this._authSvc.userRole$;
 
 	constructor() {
 		this.searchMovieForm = this._formBuilder.group({
@@ -94,6 +94,12 @@ export class MoviesListComponent {
 
 	AddNewMovie() {
 		this._router.navigate(['explore-movies/add']);
+	}
+
+	deleteWindowConfirm(id: number) {
+		if (window.confirm('Quieres eliminar esta película?')) {
+			this.Delete(id);
+		}
 	}
 
 	// Eliminando una película

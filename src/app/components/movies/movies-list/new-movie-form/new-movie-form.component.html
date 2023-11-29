@@ -131,12 +131,12 @@
 					formControlName="genres"
 					multiple="true"
 				>
-					<option value="" selected disabled>
+					<option ngValue="null" selected disabled>
 						¿Cuál es el género de esta película?
 					</option>
 					<option
 						*ngFor="let genre of genres$ | async"
-						[value]="genre.genre"
+						[value]="genre.id"
 					>
 						{{ genre.genre }}
 					</option>

@@ -15,6 +15,7 @@ export class MovieComponent implements OnInit, OnDestroy {
 
 	movie: Movie | any;
 	genres: Array<MovieGenre> | any = [];
+	rating: number;
 
 	// De la url recibimos el valor del id en un string. empleamos snapshot para coger el valor estático de la url y evitar que cambie y luego el método paramMap "mapeo de parámetros de la url". Después hacemos un get
 	id: string | null = this._activatedRoute.snapshot.paramMap.get('id');
@@ -52,9 +53,15 @@ export class MovieComponent implements OnInit, OnDestroy {
 			this.genres = genres;
 			console.log('Estamos trayendo los generos de la película?', genres);
 		});
+
+		console.log('Recibimos el rating?', this.rating);
 	}
 
-	// Tenemos que generar la llamada que nos trae el rating total de la película
+	// Tenemos que recoger la info que nos llega por el @Output
+	gettingRating(rating: number) {
+		this.rating = rating;
+		console.log('Tenemos el rating:', rating);
+	}
 
 	ngOnDestroy(): void {
 		this.subscription.unsubscribe();

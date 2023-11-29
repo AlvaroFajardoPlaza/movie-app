@@ -1,23 +1,20 @@
 <div class="background-page">
 	<div class="container">
-		<h1 class="text-center pt-5">Explora el listado de películas</h1>
-
-		<pre>{{ userRole$ | async | json }}</pre>
-
-		<ng-container *ngIf="(userRole$ | async)?.[0].role === 'admin'">
-			<div class="d-flex justify-content-center gap-2 mt-3 mb-3">
-				<h4 class="lead">
-					Si tienes el rol de administrador dentro de la aplicación,
-					puedes añadir una nueva película:
-				</h4>
-				<button
-					class="btn btn-sm btn-secondary rounded-pill shadow"
-					(click)="AddNewMovie()"
-				>
-					Añadir
+		<!-- <pre>{{ userRole$ | async | json }}</pre> -->
+		<ng-container *ngIf="(userRole$ | async)?.role === 'admin'">
+			<div
+				class="admin-section-panel d-flex flex-column justify-content-center"
+			>
+				<h2 class="text-light text-center fw-lighter">
+					Bienvenido de vuelta administrador
+				</h2>
+				<button class="btn btn-primary" (click)="AddNewMovie()">
+					Añadir un nueva película
 				</button>
 			</div>
 		</ng-container>
+
+		<h1 class="text-center pt-5">Explora el listado de películas</h1>
 
 		<ng-container *ngIf="!moviesList$">
 			<div>
@@ -25,27 +22,29 @@
 			</div>
 		</ng-container>
 
-		<!-- NUESTRA SEARCH BAR -->
-		<form
-			class="d-flex justify-content-center gap-2 mb-4"
-			[formGroup]="searchMovieForm"
-			(ngSubmit)="FilterResults(filter.value)"
-		>
-			<input
-				#filter
-				type="text"
-				class="form-control rounded-pill"
-				style="width: 20rem"
-				placeholder="Introduce el título de una película"
-			/>
-			<button
-				type="submit"
-				class="btn btn-sm btn-outline-dark rounded-pill"
-				((keyup))="FilterResults(filter.value)"
+		<!-- NUESTRA SEARCH BAR Y ADD MOVIE SI ERES ADMIN -->
+		<div class="d-flex justify-content-center gap-2 mt-4">
+			<form
+				class="d-flex justify-content-center gap-2 mb-4"
+				[formGroup]="searchMovieForm"
+				(ngSubmit)="FilterResults(filter.value)"
 			>
-				Buscar
-			</button>
-		</form>
+				<input
+					#filter
+					type="text"
+					class="form-control rounded-pill"
+					style="width: 20rem"
+					placeholder="Introduce el título de una película"
+				/>
+				<button
+					type="submit"
+					class="btn btn-sm btn-outline-dark rounded-pill"
+					((keyup))="FilterResults(filter.value)"
+				>
+					Buscar
+				</button>
+			</form>
+		</div>
 
 		<div
 			class="section d-flex justify-content-center flex-wrap gap-3 pt-4 pb-5"
@@ -87,19 +86,13 @@
 					</div>
 
 					<!-- SOLO EL ROL DE ADMIN PUEDE BORRAR LAS PELÍCULAS -->
-					<!-- ESTO DEBERÍA SER UN NG-TEMPLATE QUE SE MUESTRE CHEQUEANDO EL
-					ROL DEL USER$ -->
 					<ng-container
-						*ngIf="(userRole$ | async)?.[0]?.role === 'admin'"
+						*ngIf="(userRole$ | async)?.role === 'admin'"
 						class="card-footer d-flex justify-content-start gap-2"
 					>
-						<p style="font-size: 0.65rem">
-							Tenemos que chequear el usuario. Si es admin, puede
-							eliminar
-						</p>
 						<button
-							class="btn btn-sm btn-outline-danger rounded-pill"
-							(click)="Delete(movie.id)"
+							class="btn btn-sm btn-outline-danger"
+							(click)="deleteWindowConfirm(movie.id)"
 						>
 							delete movie
 						</button>

@@ -39,6 +39,7 @@ export class MoviesListComponent {
 	filteredMovieList$: Observable<Array<Movie>> = this.moviesList$;
 
 	userLogged$ = this._authSvc.user$;
+	username: string;
 
 	// Conseguimos el rol del usuario
 	userRole$: Observable<UserRole> = this._authSvc.userRole$;
@@ -62,6 +63,7 @@ export class MoviesListComponent {
 
 		// Tenemos un usuario loggeado? Nos subscribimos al observable
 		this.userLogged$.subscribe((user) => {
+			this.username = user.username;
 			console.log('El usuario está loggeado?', user);
 		});
 		this.userRole$.subscribe((role) => {

@@ -1,21 +1,23 @@
 <div class="background-page">
-	<div class="container">
-		<!-- <pre>{{ userRole$ | async | json }}</pre> -->
-		<ng-container *ngIf="(userRole$ | async)?.role === 'admin'">
-			<div
-				class="admin-section-panel d-flex flex-column justify-content-center"
+	<!-- <pre>{{ userRole$ | async | json }}</pre> -->
+	<ng-container *ngIf="(userRole$ | async)?.role === 'admin'">
+		<div
+			class="admin-section-panel d-flex flex-column justify-content-center"
+		>
+			<h2 class="text-light text-center fw-lighter pt-5 mb-3">
+				Bienvenido de vuelta, administrador <b>{{ username }}</b>
+			</h2>
+			<button
+				class="align-self-center col-3 btn btn-primary shadow"
+				(click)="AddNewMovie()"
 			>
-				<h2 class="text-light text-center fw-lighter">
-					Bienvenido de vuelta administrador
-				</h2>
-				<button class="btn btn-primary" (click)="AddNewMovie()">
-					Añadir un nueva película
-				</button>
-			</div>
-		</ng-container>
+				Añadir una nueva película
+			</button>
+		</div>
+	</ng-container>
 
+	<div class="container pt-5">
 		<h1 class="text-center pt-5">Explora el listado de películas</h1>
-
 		<ng-container *ngIf="!moviesList$">
 			<div>
 				<h4 class="mt-5">Loading</h4>
@@ -47,26 +49,27 @@
 		</div>
 
 		<div
-			class="section d-flex justify-content-center flex-wrap gap-3 pt-4 pb-5"
+			class="section d-flex justify-content-center flex-wrap gap-4 pt-4 pb-5"
 		>
 			<ng-container *ngFor="let movie of filteredMovieList$ | async">
-				<div class="card movieCard shadow-sm">
-					<div class="card-head">
-						<img
-							src="{{ movie.image }}"
-							class="card-img-top mt-2"
-							alt="..."
-							(click)="MovieInfo(movie.id)"
-						/>
-					</div>
+				<div class="card movieCard">
+					<!-- <div class="card-head"></div> -->
 
 					<div
-						class="card-body mt-2 d-flex flex-column justify-content-start"
+						class="card-body d-flex flex-column justify-content-start"
 					>
+						<div class="image-container mb-4">
+							<img
+								src="{{ movie.image }}"
+								class="card-img-top"
+								alt="..."
+								(click)="MovieInfo(movie.id)"
+							/>
+						</div>
 						<h4 class="card-title fw-bold">{{ movie.title }}</h4>
-						<h6 class="lead fs-6 text-green">
+						<p class="lead fs-6 text-info">
 							{{ movie.year }}
-						</h6>
+						</p>
 
 						<p class="card-text card__preview-text fw-light">
 							{{ movie.summary }}

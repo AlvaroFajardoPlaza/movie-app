@@ -42,6 +42,15 @@ export class MoviesService {
 		);
 	}
 
+	// Llamada al listado de películas que coinciden con el genero seleccionado
+	getMoviesByMovieGenre(genreId: number): Observable<Array<Movie>> {
+		// Hay que parsear el genreId
+		let genreIdParsed = genreId.toString();
+		return this.http.get<Array<Movie>>(
+			`${environment.baseUrl}/${this.prefix}/moviesByGenreId/${genreIdParsed}`
+		);
+	}
+
 	// Añadimos una nueva película y solicitamos una Promesa
 	post(movieValues: Movie): Observable<Movie> {
 		console.log('Estos son los valores del formulario: ', movieValues);

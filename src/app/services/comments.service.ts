@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Comment } from '../models/comment.interfaze';
 import { environment } from 'src/environments/environment';
+import { RatingResponse } from '../models/rating-response';
 
 @Injectable({
 	providedIn: 'root'
@@ -31,6 +32,13 @@ export class CommentsService {
 		return this._http.post<Comment>(
 			`${environment.baseUrl}/${this.prefix}`,
 			commentValues
+		);
+	}
+
+	// Rating de pelicula por su movieId >>> transformar a number
+	rating(movieId: string): Observable<RatingResponse> {
+		return this._http.get<RatingResponse>(
+			`${environment.baseUrl}/${this.prefix}/rating/${movieId}`
 		);
 	}
 }

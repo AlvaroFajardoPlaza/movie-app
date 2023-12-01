@@ -4,11 +4,13 @@
 		<div
 			class="admin-section-panel d-flex flex-column justify-content-center"
 		>
-			<h2 class="text-light text-center fw-lighter pt-5 mb-3">
-				Bienvenido de vuelta, administrador <b>{{ username }}</b>
-			</h2>
+			<div class="pt-4">
+				<h2 class="text-light text-center fw-lighter pt-5 mb-3">
+					Bienvenido de vuelta, administrador <b>{{ username }}</b>
+				</h2>
+			</div>
 			<button
-				class="align-self-center col-3 btn btn-primary shadow"
+				class="align-self-center col-3 btn btn-sm btn-primary shadow"
 				(click)="AddNewMovie()"
 			>
 				Añadir una nueva película
@@ -24,28 +26,49 @@
 			</div>
 		</ng-container>
 
-		<!-- NUESTRA SEARCH BAR Y ADD MOVIE SI ERES ADMIN -->
-		<div class="d-flex justify-content-center gap-2 mt-4">
-			<form
-				class="d-flex justify-content-center gap-2 mb-4"
-				[formGroup]="searchMovieForm"
-				(ngSubmit)="FilterResults(filter.value)"
-			>
-				<input
-					#filter
-					type="text"
-					class="form-control rounded-pill"
-					style="width: 20rem"
-					placeholder="Introduce el título de una película"
-				/>
-				<button
-					type="submit"
-					class="btn btn-sm btn-outline-dark rounded-pill"
-					((keyup))="FilterResults(filter.value)"
+		<!-- NUESTRA SEARCH BAR Y FILTRADO POR GENERO -->
+		<div class="d-flex flex-column justify-content-center gap-2 mt-4 mb-3">
+			<div class="row">
+				<form
+					class="d-flex justify-content-center gap-2 mt-5"
+					[formGroup]="searchMovieForm"
+					(ngSubmit)="filterResults(filter.value)"
 				>
-					Buscar
-				</button>
-			</form>
+					<input
+						#filter
+						type="text"
+						class="form-control rounded-pill"
+						style="width: 20rem"
+						placeholder="Introduce el título de una película"
+					/>
+					<button
+						type="submit"
+						class="btn btn-sm btn-outline-dark rounded-pill"
+						((keyup))="filterResults(filter.value)"
+					>
+						Buscar
+					</button>
+				</form>
+			</div>
+			<!-- SECCIÓN DE FILTRADO POR GÉNEROS -->
+			<div class="d-flex justify-content-center">
+				<div class="filter-section-card row p-3">
+					<!-- <h6 class="lead text-start text-secondary mb-3 mt-2">
+						Filtros por género de película:
+					</h6> -->
+					<div
+						class="d-flex flex-wrap justify-content-center gap-1 mb-2"
+					>
+						<button
+							*ngFor="let genre of movieGenres$ | async"
+							class="btn btn-sm btn-secondary rounded-pill"
+							(click)="filterByMovieGenre(genre.id)"
+						>
+							{{ genre.genre }}
+						</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<div

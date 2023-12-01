@@ -15,6 +15,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserRole } from 'src/app/models/user-role';
 import { User } from 'src/app/models/user.interface';
+import { MovieGenre } from 'src/app/models/movie-genre';
 
 @Component({
 	selector: 'app-movies-list',
@@ -37,6 +38,9 @@ export class MoviesListComponent {
 
 	searchMovieForm: FormGroup | any;
 	filteredMovieList$: Observable<Array<Movie>> = this.moviesList$;
+
+	movieGenres$: Observable<Array<MovieGenre>> =
+		this._movieService.getAllGenres();
 
 	userLogged$ = this._authSvc.user$;
 	username: string;
@@ -69,10 +73,15 @@ export class MoviesListComponent {
 		this.userRole$.subscribe((role) => {
 			console.log(role);
 		});
+
+		// Tenemos que subscribirnos al servicio que nos trae los generos
+		this.movieGenres$.subscribe((genre) => {
+			console.log('Traemos cada genero?', genre);
+		});
 	}
 
-	// Esta es la función que nos filtrará los resultados de nuestra lista
-	FilterResults(text: string) {
+	// Función Search Bar que nos filtrará los resultados de nuestra lista
+	filterResults(text: string) {
 		console.log('Tenemos algo en el input?', text);
 		if (!text) {
 			console.log('No se ha introducido nada en el input');
@@ -87,6 +96,17 @@ export class MoviesListComponent {
 				)
 			)
 		);
+	}
+
+	// Función filter por Movie Genre
+	filterByMovieGenre(movieGenre: number) {
+		console.log(
+			'Este es el valor del género que hemos clickado:',
+			movieGenre
+		);
+		this.filteredMovieList$ =
+			this._movieService.getMoviesByMovieGenre(movieGenre);
+		console.log('Tenemos el listado?', this.filteredMovieList$);
 	}
 
 	// Rutas de navegación dentro del componente

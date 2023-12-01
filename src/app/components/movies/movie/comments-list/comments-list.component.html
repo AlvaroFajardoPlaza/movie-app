@@ -6,14 +6,7 @@
 	</div>
 
 	<div class="col">
-		<div class="d-flex gap-3 mt3">
-			<h6>
-				¿Hemos recibido el rating y se ha hecho la media correctamente?
-			</h6>
-			<h6 class="fw-bold">{{ averageMovieRating }}</h6>
-		</div>
-
-		<h5 class="lead">Sección de comentarios:</h5>
+		<h5 class="lead">Reviews de la película:</h5>
 		<div class="d-flex flex-column justify-content-start gap-2">
 			<div
 				*ngFor="let comment of commentsList$ | async"

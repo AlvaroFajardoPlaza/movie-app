@@ -4,6 +4,8 @@ import { Observable, Subscription, filter, map, switchMap } from 'rxjs';
 import { Movie } from 'src/app/models/movie.interface';
 import { MovieGenre } from 'src/app/models/movie-genre';
 import { MoviesService } from 'src/app/services/movies.service';
+import { CommentsService } from 'src/app/services/comments.service';
+import { RatingResponse } from 'src/app/models/rating-response';
 
 @Component({
 	selector: 'app-movie',
@@ -12,10 +14,12 @@ import { MoviesService } from 'src/app/services/movies.service';
 })
 export class MovieComponent implements OnInit, OnDestroy {
 	private _activatedRoute = inject(ActivatedRoute);
+	private _movieSvc = inject(MoviesService);
+	private _commentsService = inject(CommentsService);
 
 	movie: Movie | any;
 	genres: Array<MovieGenre> | any = [];
-	rating: number;
+	rating2: any;
 
 	// De la url recibimos el valor del id en un string. empleamos snapshot para coger el valor estático de la url y evitar que cambie y luego el método paramMap "mapeo de parámetros de la url". Después hacemos un get
 	id: string | null = this._activatedRoute.snapshot.paramMap.get('id');
@@ -29,20 +33,22 @@ export class MovieComponent implements OnInit, OnDestroy {
 		filter((id: string | null) => !!id),
 
 		// Obtenemos la película a través del id
-		switchMap((id: string) => this.movieService.findById(+id))
+		switchMap((id: string) => this._movieSvc.findById(+id))
 	);
 
-	movieGenres$: Observable<Array<MovieGenre>> = this.movieService.getGenres(
+	movieGenres$: Observable<Array<MovieGenre>> = this._movieSvc.getGenres(
 		+this.id
+	);
+
+	movieRating$: Observable<RatingResponse> = this._commentsService.rating(
+		this.id
 	);
 
 	subscription: Subscription;
 
-	constructor(private movieService: MoviesService) {}
-
 	ngOnInit(): void {
 		if (this.id) {
-			this.subscription = this.movieService
+			this.subscription = this._movieSvc
 				.findById(+this.id)
 				.subscribe((movie: Movie) => {
 					this.movie = movie;
@@ -54,14 +60,16 @@ export class MovieComponent implements OnInit, OnDestroy {
 			console.log('Estamos trayendo los generos de la película?', genres);
 		});
 
-		console.log('Recibimos el rating?', this.rating);
+		this.subscription = this.movieRating$.subscribe((rating) => {
+			this.rating2 = rating.finalResult;
+		});
 	}
 
 	// Tenemos que recoger la info que nos llega por el @Output
-	gettingRating(rating: number) {
-		this.rating = rating;
-		console.log('Tenemos el rating:', rating);
-	}
+	// onRatingReceived(rating: number) {
+	// 	this.rating = rating;
+	// 	console.log('Tenemos el rating:', rating);
+	// }
 
 	ngOnDestroy(): void {
 		this.subscription.unsubscribe();

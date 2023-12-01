@@ -5,8 +5,8 @@ export interface Movie {
 	summary: string;
 	comment: string;
 	image: string;
-	genre1: number;
-	genre2: number;
+	// genre1: number;
+	// genre2: number;
 	cast: string;
 	director: string;
 }

@@ -28,19 +28,20 @@
 					</button>
 				</div>
 
-				<!-- AQUÍ TENEMOS QUE RECIBIR EL VALOR DEL OUTPUT -->
-				<h3 class="lead fw-bold mt-5">
-					Valoración media según los usuarios:
-				</h3>
-				<div class="content lead">
-					La valoración media es: {{ rating }}
+				<div class="card bg-dark p-3 shadow mt-5">
+					<h3 class="lead text-light mt-2">
+						Valoración media según los usuarios:
+						<span class="fw-bold text-success">{{ rating2 }}</span>
+					</h3>
 				</div>
 			</div>
 		</div>
 		<div class="row mt-4">
-			<app-comments-list
-				(sendRatingToMovieComponent)="gettingRating($event)"
-			></app-comments-list>
+			<!-- ELIMINAMOS EL OUTPUT DEL RATING Y LO TRAEMOS DESDE EL SERVICIO CON UNA LLAMADA -->
+			<!-- <app-comments-list
+				(sendRatingToMovieComponent)="onRatingReceived($event)"
+			></app-comments-list> -->
+			<app-comments-list></app-comments-list>
 		</div>
 	</div>
 </div>

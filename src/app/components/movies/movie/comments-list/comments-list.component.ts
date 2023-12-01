@@ -27,8 +27,7 @@ export class CommentsListComponent implements OnInit {
 	);
 
 	// Mandamos el rating al componente de nivel superior
-	@Output() sendRatingToMovieComponent: EventEmitter<number> =
-		new EventEmitter<number>();
+	@Output() sendRatingToMovieComponent = new EventEmitter<number>();
 
 	sendRating(): void {
 		this.sendRatingToMovieComponent.emit(this.averageMovieRating);
@@ -46,6 +45,7 @@ export class CommentsListComponent implements OnInit {
 			const result =
 				numberOfComments > 0 ? totalRatings / numberOfComments : null; // Calcula la media o asigna null si no hay comentarios
 			this.averageMovieRating = Math.round(result * 100) / 100;
+			this.sendRating();
 			console.log(this.averageMovieRating);
 		});
 	}

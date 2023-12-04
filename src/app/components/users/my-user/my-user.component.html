@@ -1,0 +1,36 @@
+<div class="container pt-5">
+	<h2 class="mt-5">Panel de usuario</h2>
+
+	<pre>{{ user$ | async | json }}</pre>
+</div>
+
+<div class="container mt-4 mb-5">
+	<div class="d-flex flex-column gap-2">
+		<div
+			*ngFor="let review of userReviews$ | async"
+			class="card p-3 shadow d-flex justify-content-between"
+		>
+			<p class="lead text-success ms-3">{{ review.rating }}</p>
+			<p class="text-lead fs-6 mt-2 ms-3 me-3">{{ review.comment }}</p>
+
+			<!-- PLANTEAMOS LOS DOS BOTONES PARA EDITAR Y ELIMINAR EL COMENTARIO -->
+			<div class="d-flex gap-2 ms-2 mt-3">
+				<button class="btn btn-sm btn-outlined rounded-pill">
+					<fa-icon [icon]="faCircleArrowRight"></fa-icon>
+					Navigate to this movie
+				</button>
+				<button class="btn btn-sm btn-outlined rounded-pill">
+					<fa-icon [icon]="faFileEdit"></fa-icon>
+					Edit
+				</button>
+				<button class="btn btn-sm btn-danger rounded-pill">
+					<fa-icon [icon]="faSquareMinus"></fa-icon>
+					Delete
+				</button>
+				<p class="reviewLastUpdateText text-secondary ms-auto me-3">
+					{{ review.last_update | date : "dd/MM/yyyy" }}
+				</p>
+			</div>
+		</div>
+	</div>
+</div>

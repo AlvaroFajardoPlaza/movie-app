@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'src/app/models/MenuItem.interface';
 import { AuthService } from 'src/app/services/auth.service';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
 	selector: 'app-horizontal-bar',
@@ -11,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HorizontalBarComponent implements OnInit {
 	private _router = inject(Router);
 	private _authSvc = inject(AuthService);
+	faUser = faUser;
 
 	user$ = this._authSvc.user$;
 
@@ -43,6 +45,10 @@ export class HorizontalBarComponent implements OnInit {
 
 	loginRedirect() {
 		this._router.navigate(['login']);
+	}
+
+	navigateToMyUserPanel() {
+		this._router.navigate(['myUser']);
 	}
 
 	logout() {

@@ -12,9 +12,14 @@ import { RegisterComponent } from './components/registration/register/register.c
 import { LoginComponent } from './components/registration/login/login.component';
 import { authPermissionGuard } from './guards/auth-permission.guard';
 import { NewMovieFormComponent } from './components/movies/movies-list/new-movie-form/new-movie-form.component';
+import { MyUserComponent } from './components/users/my-user/my-user.component';
 
 const routes: Routes = [
 	{ path: 'home', component: HomeComponent },
+	{ path: 'register', component: RegisterComponent },
+	{ path: 'login', component: LoginComponent },
+	// Ruta para ver el panel del usuario y modificar sus datos
+	{ path: 'myUser', component: MyUserComponent },
 	{
 		path: 'explore-movies',
 		component: MoviesListComponent,
@@ -33,9 +38,7 @@ const routes: Routes = [
 	},
 	{ path: 'pricing', component: PricingComponent },
 	{ path: 'features', component: FeaturesComponent },
-	{ path: 'about-me', component: AboutUsComponent },
-	{ path: 'register', component: RegisterComponent },
-	{ path: 'login', component: LoginComponent }
+	{ path: 'about-me', component: AboutUsComponent }
 ];
 
 @NgModule({

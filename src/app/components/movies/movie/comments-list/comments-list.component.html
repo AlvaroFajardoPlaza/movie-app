@@ -25,9 +25,12 @@
 						{{ comment.rating }}/5
 					</p>
 				</div>
-				<div class="mb-3">
-					<p class="fs-6 text-secondar ms-3 me-2 mt-3">
+				<div class="mb-3 d-flex justify-content-between">
+					<p class="fs-6 ms-3 me-2 mt-3">
 						{{ comment.comment }}
+					</p>
+					<p class="fs-6 text-secondary ms-2 me-4 mt-3">
+						{{ comment.last_update | date : "dd/MM/yyyy" }}
 					</p>
 				</div>
 			</div>

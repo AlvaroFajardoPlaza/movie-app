@@ -27,27 +27,31 @@ export class CommentsListComponent implements OnInit {
 	);
 
 	// Mandamos el rating al componente de nivel superior
-	@Output() sendRatingToMovieComponent = new EventEmitter<number>();
+	// No necesitamos este output ya que hacemos una llamada al servicio más especifica
+	// @Output() sendRatingToMovieComponent = new EventEmitter<number>();
 
-	sendRating(): void {
-		this.sendRatingToMovieComponent.emit(this.averageMovieRating);
-	}
+	// sendRating(): void {
+	// 	this.sendRatingToMovieComponent.emit(this.averageMovieRating);
+	// }
 
 	ngOnInit(): void {
-		// Calcula la media cuando la lista de comentarios se actualiza
 		this.commentsList$.subscribe((comments) => {
-			const ratings = comments.map((comment) => comment.rating); // Extrae los ratings de los comentarios
-			const totalRatings = ratings.reduce(
-				(sum, rating) => sum + rating,
-				0
-			); // Calcula la suma de los ratings
-			const numberOfComments = comments.length;
-			const result =
-				numberOfComments > 0 ? totalRatings / numberOfComments : null; // Calcula la media o asigna null si no hay comentarios
-			this.averageMovieRating = Math.round(result * 100) / 100;
-			this.sendRating();
-			console.log(this.averageMovieRating);
+			console.log('Recibimos los comentarios: ', comments);
 		});
+		// Calcula la media cuando la lista de comentarios se actualiza
+		// this.commentsList$.subscribe((comments) => {
+		// 	const ratings = comments.map((comment) => comment.rating); // Extrae los ratings de los comentarios
+		// 	const totalRatings = ratings.reduce(
+		// 		(sum, rating) => sum + rating,
+		// 		0
+		// 	); // Calcula la suma de los ratings
+		// 	const numberOfComments = comments.length;
+		// 	const result =
+		// 		numberOfComments > 0 ? totalRatings / numberOfComments : null; // Calcula la media o asigna null si no hay comentarios
+		// 	this.averageMovieRating = Math.round(result * 100) / 100;
+		// 	this.sendRating();
+		// 	console.log(this.averageMovieRating);
+		// });
 	}
 
 	onNewCommentSubmit() {

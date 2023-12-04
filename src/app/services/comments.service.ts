@@ -13,20 +13,29 @@ export class CommentsService {
 	private _http = inject(HttpClient);
 	prefix: string = 'api/comments';
 
-	// Llamada a todos los comentarios que existen en la tabla "commentsTable"
+	// Llamada a todos los comentarios que existen en la tabla "commentsTable" >>>
 	getAll(): Observable<Array<Comment>> {
 		return this._http.get<Array<Comment>>(
 			`${environment.baseUrl}/${this.prefix}`
 		);
 	}
 
+	// Llamada a los comentarios de un user por su user.username
+	findByUsername(username: string): Observable<Array<Comment>> {
+		console.log('recibes el username?', username);
+		return this._http.get<Array<Comment>>(
+			`${environment.baseUrl}/${this.prefix}/myUser/${username}`
+		);
+	}
+
+	// Recopila los comentarios de una película por su movieId >>>
 	findById(id: number): Observable<Array<Comment>> {
 		return this._http.get<Array<Comment>>(
 			`${environment.baseUrl}/${this.prefix}/${id}`
 		);
 	}
 
-	// Post de un nuevo comentario
+	// Post de un nuevo comentario >>>
 	post(commentValues: Comment): Observable<Comment> {
 		console.log('Este es nuestro nuevo comentario: ', commentValues);
 		return this._http.post<Comment>(

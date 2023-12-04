@@ -61,8 +61,16 @@
 
 		<div class="d-flex gap-2">
 			<ng-container *ngIf="user$ | async as user; else noUserTpt">
-				<button class="btn btn-secondary">
-					{{ user.email }}
+				<button
+					class="btn btn-secondary"
+					(click)="navigateToMyUserPanel()"
+				>
+					<fa-icon
+						[icon]="faUser"
+						style="color: #ffffff"
+						class="me-2"
+					></fa-icon>
+					{{ user.username }}
 				</button>
 				<button class="btn btn-outline-light" (click)="logout()">
 					Log out <span class="bi-plus-square-fill"></span>

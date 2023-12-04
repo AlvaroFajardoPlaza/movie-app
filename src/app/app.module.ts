@@ -18,6 +18,7 @@ import player from 'lottie-web';
 import { LoginComponent } from './components/registration/login/login.component';
 import { RegisterComponent } from './components/registration/register/register.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UsersModule } from './components/users/users.module';
 
 // Export this function
 export function playerFactory(): any {
@@ -43,7 +44,8 @@ export function playerFactory(): any {
 		LottieModule.forRoot({ player: playerFactory }),
 		FormsModule,
 		ReactiveFormsModule,
-		FontAwesomeModule
+		FontAwesomeModule,
+		UsersModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

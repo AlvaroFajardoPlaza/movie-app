@@ -60,8 +60,16 @@ export class MoviesService {
 		);
 	}
 
-	// Borramos una película
-	delete(id: Number): Observable<Movie> {
+	// SOFT DELETE ----> Va a ser una request de tipo PUT
+	softDelete(id: number) {
+		return this.http.put<Movie>(
+			`${environment.baseUrl}/${this.prefix}/softdel/${id}`,
+			''
+		);
+	}
+
+	// Borramos una película ---> HARD DELETE
+	hardDelete(id: number): Observable<Movie> {
 		return this.http.delete<Movie>(
 			`${environment.baseUrl}/${this.prefix}/${id}`
 		);

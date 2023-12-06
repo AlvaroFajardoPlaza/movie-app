@@ -19,7 +19,11 @@ const routes: Routes = [
 	{ path: 'register', component: RegisterComponent },
 	{ path: 'login', component: LoginComponent },
 	// Ruta para ver el panel del usuario y modificar sus datos
-	{ path: 'myUser', component: MyUserComponent },
+	{
+		path: 'myUser',
+		component: MyUserComponent,
+		canActivate: [authPermissionGuard]
+	},
 	{
 		path: 'explore-movies',
 		component: MoviesListComponent,

@@ -20,14 +20,15 @@
 
 	<div class="container pt-5">
 		<h1 class="text-center pt-5">Explora el listado de películas</h1>
+		<hr class="bg-dark border-2 border-top border-dark ms-5 me-5" />
 		<ng-container *ngIf="!moviesList$">
 			<div>
-				<h4 class="mt-5">Loading</h4>
+				<h4 class="mt-4">Loading</h4>
 			</div>
 		</ng-container>
 
 		<!-- NUESTRA SEARCH BAR Y FILTRADO POR GENERO -->
-		<div class="d-flex flex-column justify-content-center gap-2 mt-2 mb-3">
+		<div class="d-flex flex-column justify-content-center gap-2 mb-3">
 			<div class="row">
 				<form
 					class="d-flex justify-content-center gap-2 mt-5"
@@ -118,13 +119,57 @@
 					>
 						<button
 							class="btn btn-sm btn-outline-danger"
-							(click)="deleteWindowConfirm(movie.id)"
+							data-bs-toggle="modal"
+							data-bs-target="#deleteMovieModal"
+							(click)="OpenDeleteModal(movie.id)"
 						>
 							delete movie
 						</button>
 					</ng-container>
 				</div>
 			</ng-container>
+		</div>
+	</div>
+</div>
+
+<!-- TENEMOS QUE COMPROBAR COMO PODEMOS PASARLE EL MOVIE ID -->
+<div
+	class="modal fade"
+	tabindex="-1"
+	id="deleteMovieModal"
+	aria-labelledby="deleteMovieModal"
+	aria-hidden="true"
+>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<p class="lead mt-3">
+					¿Estás seguro de que quieres borrar esta película?
+				</p>
+				<p class="text-danger">
+					Atención: una vez que elimines una película, no volverá a
+					aparecer en el panel de exploración. El resto de usuarios no
+					podrán visualizarla. ****
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button
+					type="button"
+					class="btn btn-secondary"
+					data-bs-dismiss="modal"
+				>
+					Cancelar
+				</button>
+				<button
+					(click)="sofDelete()"
+					type="button"
+					class="btn btn-danger"
+					data-bs-dismiss="modal"
+				>
+					<fa-icon [icon]="faSquareMinus" class="me-2"></fa-icon
+					>Eliminar Película
+				</button>
+			</div>
 		</div>
 	</div>
 </div>

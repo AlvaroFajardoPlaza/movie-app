@@ -1,3 +1,24 @@
+.backgroundUserProfilePage {
+    background-color: #424242;
+}
+
+.user-main-info-section {
+    border: solid 1px white;
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 14px 28px, rgba(0, 0, 0, 0.18) 0px 10px 10px;
+}
+
+.user-profile-pic-div {
+    overflow: hidden;
+}
+
+.user-profile-pic {
+    border-radius: 25rem;
+    height: auto;
+    width: 100%;
+    border: solid 1px white;
+}
+
 .reviewLastUpdateText {
     font-size: 0.8rem;
 }

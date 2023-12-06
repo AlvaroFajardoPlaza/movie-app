@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MoviesService } from 'src/app/services/movies.service';
 import { Movie } from 'src/app/models/movie.interface';
 import {
+	BehaviorSubject,
 	Observable,
 	Subscription,
 	catchError,
@@ -16,6 +17,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserRole } from 'src/app/models/user-role';
 import { User } from 'src/app/models/user.interface';
 import { MovieGenre } from 'src/app/models/movie-genre';
+import { faSquareMinus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
 	selector: 'app-movies-list',
@@ -30,6 +32,7 @@ export class MoviesListComponent {
 	private _authSvc = inject(AuthService);
 	private _formBuilder = inject(FormBuilder);
 
+	faSquareMinus = faSquareMinus;
 	movies: Array<Movie> = [];
 	movie: Movie | any;
 	subscription: Subscription; // Esta subscription nos es útil al manejar el ciclo de vida del componente.
@@ -47,6 +50,10 @@ export class MoviesListComponent {
 
 	// Conseguimos el rol del usuario
 	userRole$: Observable<UserRole> = this._authSvc.userRole$;
+
+	selectedMovieId: number = null;
+
+	refresher$ = new BehaviorSubject<void>(null);
 
 	constructor() {
 		this.searchMovieForm = this._formBuilder.group({
@@ -118,24 +125,38 @@ export class MoviesListComponent {
 		this._router.navigate(['explore-movies/add']);
 	}
 
-	deleteWindowConfirm(id: number) {
-		if (window.confirm('Quieres eliminar esta película?')) {
-			this.Delete(id);
+	OpenDeleteModal(movieId: number) {
+		console.log('tenemos el id de la pelicula', movieId);
+		this.selectedMovieId = movieId;
+	}
+
+	// Eliminando una película. Nos faltaría gestionar el soft delete.
+	sofDelete() {
+		console.log('Movie id: ', this.selectedMovieId);
+		if (this.selectedMovieId) {
+			this._movieService.softDelete(this.selectedMovieId).subscribe(
+				() => {
+					console.log('Pelicula soft-deleteada');
+					this.filterResults('');
+				},
+				(err) => {
+					console.log('Ha habido un error...', err);
+				}
+			);
 		}
 	}
 
-	// Eliminando una película
-	Delete(id: Number) {
+	// SOLUCIONAR PORQUE NOS DA UN TYPEERROR
+	hardDelete(id: number | any) {
 		console.log('El id de la película es: ', id);
 
 		// Nos tenemos que asegurar de subscribirnos al observable para manejar la respuesta a la llamada HTTP
 		if (id) {
-			this._movieService.delete(id).subscribe(
+			this._movieService.hardDelete(id).subscribe(
 				() => {
 					console.log('Película eliminada!');
-					this.movies = this.movies.filter(
-						(movie) => movie.id !== id
-					);
+					// this.refresher$.next();
+					this.filterResults('');
 				},
 				(err) => {
 					console.log('Ha habido un error', err);

@@ -6,6 +6,7 @@ import { NewMovieFormComponent } from './movies-list/new-movie-form/new-movie-fo
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommentsListComponent } from './movie/comments-list/comments-list.component';
 import { NewCommentFormComponent } from './movie/new-comment-form/new-comment-form.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
 	declarations: [
@@ -15,7 +16,7 @@ import { NewCommentFormComponent } from './movie/new-comment-form/new-comment-fo
 		CommentsListComponent,
 		NewCommentFormComponent
 	],
-	imports: [CommonModule, ReactiveFormsModule],
+	imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule],
 	exports: [
 		MoviesListComponent,
 		MovieComponent,

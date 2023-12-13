@@ -87,6 +87,12 @@ export class AuthService {
 		);
 	}
 
+	getUserProfile(userUsername: string): Observable<User> {
+		return this._http.get<User>(
+			`${environment.baseUrl}/${this.prefix}/userInfo/${userUsername}`
+		);
+	}
+
 	logout() {
 		localStorage.removeItem('token');
 		this.token$.next(null);

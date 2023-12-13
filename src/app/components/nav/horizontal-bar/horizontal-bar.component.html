@@ -63,7 +63,7 @@
 			<ng-container *ngIf="user$ | async as user; else noUserTpt">
 				<button
 					class="btn btn-secondary"
-					(click)="navigateToMyUserPanel()"
+					(click)="navigateToMyUserPanel(user.username)"
 				>
 					<fa-icon
 						[icon]="faUser"

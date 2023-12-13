@@ -7,7 +7,7 @@
 					<div class="user-profile-pic-div col col-sm-12 col-md-3">
 						<img
 							class="user-profile-pic"
-							src="https://www.ikea.com/es/es/images/products/aftonsparv-peluche-alien-verde__1268879_ph195778_s5.jpg?f=s"
+							[src]="user.profilePic"
 							href="profile-pic"
 						/>
 					</div>
@@ -24,6 +24,8 @@
 								<li
 									class="lead fs-6 text-decoration-underline text-info mb-3 pe-3"
 								>
+									<!-- AQUÍ ESTAMOS RECIBIENDO EL EMAIL COMO
+									UNDEFINED -->
 									{{ user.email }}
 								</li>
 								<li class="lead fs-6 mb-3 pe-3">
@@ -37,7 +39,7 @@
 							<button
 								class="btn btn-sm btn-secondary ms-4 m-auto"
 							>
-								<fa-icon [icon]="faFileEdit"></fa-icon>
+								<i class="fa fa-file-edit"></i>
 								Editar info
 							</button>
 						</div>
@@ -57,7 +59,7 @@
 						<p>Country: {{ user.country }}</p>
 
 						<button class="btn btn-sm btn-secondary">
-							<fa-icon [icon]="faFileEdit"></fa-icon>
+							<i class="fa fa-file-edit"></i>
 							Editar info
 						</button>
 					</div>
@@ -72,42 +74,53 @@
 			<h2 class="text-light mt-5 mb-3">Mis reviews:</h2>
 			<div
 				*ngFor="let review of userReviews$ | async"
-				class="card p-3 shadow d-flex justify-content-between"
+				class="card p-3 d-flex justify-content-between"
 			>
+				<h5
+					class="lead nav-link mt-3 text-primary"
+					(click)="NavigateToMovie(review.movieId)"
+				>
+					{{ review.movieTitle }}
+				</h5>
 				<p class="lead text-success ms-3">{{ review.rating }}</p>
-				<p class="text-lead fs-6 mt-2 ms-3 me-3">
+				<p class="text-lead fs-6 ms-3 me-3">
 					{{ review.comment }}
 				</p>
 
 				<!-- PLANTEAMOS LOS DOS BOTONES PARA EDITAR Y ELIMINAR EL COMENTARIO -->
+				<!-- <ng-container *ngIf="user.username == userInRoute"> -->
 				<div class="d-flex gap-2 ms-2 mt-3">
 					<!-- TO DO: IMPLEMENTAR EL NAVIGATE DE ESTA RUTA -->
-					<button class="btn btn-sm btn-outlined rounded-pill">
-						<fa-icon [icon]="faCircleArrowRight"></fa-icon>
+					<button
+						class="btn btn-sm btn-outlined rounded-pill"
+						(click)="NavigateToMovie(review.movieId)"
+					>
+						<i class="fa fa-circle-arrow-right"></i>
 						Ir a la película
 					</button>
 					<button
 						class="btn btn-sm btn-outlined rounded-pill"
-						(click)="OpenModalEdit()"
+						(click)="OpenModalEdit(review.id)"
 						data-bs-toggle="modal"
 						data-bs-target="#editModalPopUp"
 					>
-						<fa-icon [icon]="faFileEdit"></fa-icon>
+						<i class="fa fa-file-edit"></i>
 						Editar
 					</button>
 					<button
 						class="btn btn-sm btn-danger rounded-pill"
-						(click)="OpenModalDelete()"
+						(click)="OpenModalDelete(review.id)"
 						data-bs-toggle="modal"
 						data-bs-target="#deleteModalPopUp"
 					>
-						<fa-icon [icon]="faSquareMinus"></fa-icon>
+						<i class="fa fa-square-minus"></i>
 						Eliminar review
 					</button>
 					<p class="reviewLastUpdateText text-secondary ms-auto me-3">
 						{{ review.last_update | date : "dd/MM/yyyy" }}
 					</p>
 				</div>
+				<!-- </ng-container> -->
 			</div>
 		</div>
 	</div>
@@ -188,8 +201,13 @@
 				>
 					Cancelar
 				</button>
-				<button type="submit" class="btn btn-primary">
-					<fa-icon [icon]="faBookmark" class="me-2"></fa-icon>
+				<button
+					type="submit"
+					class="btn btn-primary"
+					data-bs-dismiss="modal"
+					(click)="OnEditReview()"
+				>
+					<i class="fa fa-book-mark"></i>
 					Guardar cambios
 				</button>
 			</div>
@@ -226,8 +244,13 @@
 				>
 					Cancelar
 				</button>
-				<button type="button" class="btn btn-danger">
-					<fa-icon [icon]="faSquareMinus" class="me-2"></fa-icon>
+				<button
+					type="button"
+					class="btn btn-danger"
+					(click)="softDelete()"
+					data-bs-dismiss="modal"
+				>
+					<i class="fa fa-square-minus"></i>
 					Eliminiar review
 				</button>
 			</div>

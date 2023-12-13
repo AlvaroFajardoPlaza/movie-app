@@ -6,6 +6,9 @@ import { MovieGenre } from 'src/app/models/movie-genre';
 import { MoviesService } from 'src/app/services/movies.service';
 import { CommentsService } from 'src/app/services/comments.service';
 import { RatingResponse } from 'src/app/models/rating-response';
+import { User } from 'src/app/models/user.interface';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserRole } from 'src/app/models/user-role';
 
 @Component({
 	selector: 'app-movie',
@@ -16,6 +19,9 @@ export class MovieComponent implements OnInit, OnDestroy {
 	private _activatedRoute = inject(ActivatedRoute);
 	private _movieSvc = inject(MoviesService);
 	private _commentsService = inject(CommentsService);
+	private _authSvc = inject(AuthService);
+
+	loggedUser: User; // Comprobamos el rol del usuario que está loggeado
 
 	movie: Movie | any;
 	genres: Array<MovieGenre> | any = [];
@@ -44,6 +50,10 @@ export class MovieComponent implements OnInit, OnDestroy {
 		this.id
 	);
 
+	// Conseguimos el rol del usuario
+	//userRole$: Observable<UserRole> = this._authSvc.userRole$;
+	userRole$: Observable<UserRole> = this._authSvc.userRole$;
+
 	subscription: Subscription;
 
 	ngOnInit(): void {
@@ -63,6 +73,10 @@ export class MovieComponent implements OnInit, OnDestroy {
 		this.subscription = this.movieRating$.subscribe((rating) => {
 			this.rating2 = rating.finalResult;
 		});
+	}
+
+	editMovieData() {
+		console.log('Editamos los datos de la película desde un modal');
 	}
 
 	// Tenemos que recoger la info que nos llega por el @Output

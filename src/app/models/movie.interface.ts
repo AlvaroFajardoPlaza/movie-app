@@ -3,10 +3,11 @@ export interface Movie {
 	title: string;
 	year: number;
 	summary: string;
-	comment: string;
+	// comment: string;
 	image: string;
 	// genre1: number;
 	// genre2: number;
 	cast: string;
 	director: string;
+	isDeleted: number;
 }

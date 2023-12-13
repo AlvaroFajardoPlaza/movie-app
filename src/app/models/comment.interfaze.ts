@@ -4,4 +4,6 @@ export interface Comment {
 	rating: number; // Va de 1 a 5
 	user: string;
 	last_update?: string;
+	movieId?: number;
+	movieTitle?: string;
 }

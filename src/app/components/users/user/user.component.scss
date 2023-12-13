@@ -1,0 +1,13 @@
+@keyframes cambioColor {
+    0% {
+      background-color: #171619; /* Color inicial (oscuro) */
+    }
+    100% {
+      background-color: #121212; /* Color final (más oscuro) */
+    }
+  }
+
+.backgroundUserProfilePage {
+    animation: cambioColor 5s infinite alternate; /* Aplicar la animación al fondo del body */
+}
+

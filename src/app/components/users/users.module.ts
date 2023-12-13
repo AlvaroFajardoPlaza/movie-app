@@ -4,9 +4,10 @@ import { MyUserComponent } from './my-user/my-user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
-	declarations: [MyUserComponent],
+	declarations: [MyUserComponent, UserComponent],
 	imports: [
 		CommonModule,
 		HttpClientModule,

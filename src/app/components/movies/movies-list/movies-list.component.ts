@@ -130,7 +130,6 @@ export class MoviesListComponent {
 		this.selectedMovieId = movieId;
 	}
 
-	// Eliminando una película. Nos faltaría gestionar el soft delete.
 	sofDelete() {
 		console.log('Movie id: ', this.selectedMovieId);
 		if (this.selectedMovieId) {
@@ -146,7 +145,6 @@ export class MoviesListComponent {
 		}
 	}
 
-	// SOLUCIONAR PORQUE NOS DA UN TYPEERROR
 	hardDelete(id: number | any) {
 		console.log('El id de la película es: ', id);
 

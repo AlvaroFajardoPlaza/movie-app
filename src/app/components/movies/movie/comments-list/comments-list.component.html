@@ -18,19 +18,25 @@
 						src="https://cdn-icons-png.flaticon.com/128/7153/7153080.png"
 						alt="default-user-icon"
 					/>
-					<p class="lead fs-5 fw-bold text-primary mt-2">
+					<a
+						class="lead fs-5 fw-bold text-primary mt-2 text-decoration-underline"
+						(click)="NavigateToUser(comment.user)"
+					>
 						{{ comment.user }}
-					</p>
+					</a>
 					<p class="text-success fw-bold fs-5 mt-2">
 						{{ comment.rating }}/5
+					</p>
+					<p
+						class="text-secondary ms-auto me-4 mt-3"
+						style="font-size: 0.8rem"
+					>
+						{{ comment.last_update | date : "dd/MM/yyyy" }}
 					</p>
 				</div>
 				<div class="mb-3 d-flex justify-content-between">
 					<p class="fs-6 ms-3 me-2 mt-3">
 						{{ comment.comment }}
-					</p>
-					<p class="fs-6 text-secondary ms-2 me-4 mt-3">
-						{{ comment.last_update | date : "dd/MM/yyyy" }}
 					</p>
 				</div>
 			</div>

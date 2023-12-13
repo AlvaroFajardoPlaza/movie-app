@@ -2,7 +2,7 @@ import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { Comment } from 'src/app/models/comment.interfaze';
 import { CommentsService } from 'src/app/services/comments.service';
 import { BehaviorSubject, Observable, Subscription, switchMap } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
 	selector: 'app-comments-list',
@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 	styleUrls: ['./comments-list.component.scss']
 })
 export class CommentsListComponent implements OnInit {
+	private _router = inject(Router);
 	private _activatedRoute = inject(ActivatedRoute);
 	private _commentsService = inject(CommentsService);
 
@@ -38,20 +39,12 @@ export class CommentsListComponent implements OnInit {
 		this.commentsList$.subscribe((comments) => {
 			console.log('Recibimos los comentarios: ', comments);
 		});
-		// Calcula la media cuando la lista de comentarios se actualiza
-		// this.commentsList$.subscribe((comments) => {
-		// 	const ratings = comments.map((comment) => comment.rating); // Extrae los ratings de los comentarios
-		// 	const totalRatings = ratings.reduce(
-		// 		(sum, rating) => sum + rating,
-		// 		0
-		// 	); // Calcula la suma de los ratings
-		// 	const numberOfComments = comments.length;
-		// 	const result =
-		// 		numberOfComments > 0 ? totalRatings / numberOfComments : null; // Calcula la media o asigna null si no hay comentarios
-		// 	this.averageMovieRating = Math.round(result * 100) / 100;
-		// 	this.sendRating();
-		// 	console.log(this.averageMovieRating);
-		// });
+	}
+
+	// Comprobar si el usuario que está loggeado es el mismo que al que queremos ir.
+	// Si es así, le tenemos que redirigir a /user/mypanel/:username
+	NavigateToUser(username: string) {
+		return this._router.navigate(['user/', username]);
 	}
 
 	onNewCommentSubmit() {

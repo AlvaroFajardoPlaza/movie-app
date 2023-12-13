@@ -1,12 +1,12 @@
 export interface User {
 	// Datos esenciales del usuaru¡io
-	id?: number;
-	username?: string;
-	email?: string;
+	id: number;
+	username: string;
+	email: string;
 	password?: string;
 
 	// Datos específicos del usuario
-	profilePicture?: string;
+	profilePic?: string;
 	aboutMe?: string;
 	city?: string;
 	region?: string;

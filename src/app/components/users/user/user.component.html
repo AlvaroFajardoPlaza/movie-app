@@ -1,0 +1,143 @@
+<div class="backgroundUserProfilePage">
+	<div class="container pt-5" *ngIf="userData$ | async as user">
+		<!-- <pre class="pt-5">{{ userData$ | async | json }}</pre> -->
+
+		<div class="section row mt-5 mb-3">
+			<div class="user-main-info-section bg-dark p-4 rounded">
+				<div class="row d-flex justify-content-start">
+					<div class="user-profile-pic-div col col-sm-12 col-md-3">
+						<img class="user-profile-pic" [src]="user.profilePic" />
+					</div>
+					<div class="col col-sm-12 col-md-9 mt-3">
+						<div class="d-flex flex-column justify-content-start">
+							<ul class="text-light list-unstyled ms-4">
+								<li class="lead mb-3">
+									<span class="fw-bold"
+										>Username: {{ user.username }}</span
+									>
+								</li>
+								<hr
+									class="bg-light border-2 border-top border-light me-4"
+								/>
+								<li
+									class="lead fs-6 text-decoration-underline text-info mb-3 pe-3"
+								>
+									Email: {{ user.email }}
+								</li>
+								<li class="lead fs-6 mb-3 pe-3">
+									<span class="fw-bold">Phone:</span>
+									telefono del usuario oculto
+								</li>
+								<li class="fs-6 pe-5 fw-light">
+									{{ user.aboutMe }}
+								</li>
+							</ul>
+							<button
+								class="btn btn-sm btn-secondary ms-4 m-auto"
+							>
+								<i class="fa-solid fa-file-pen"></i>
+								Editar info
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="section row">
+			<div class="user-main-info-section bg-dark rounded p-4">
+				<div class="d-flex justify-content-start ms-3">
+					<div
+						class="d-flex flex-column justify-content-start text-light"
+					>
+						<p>City: {{ user.city }}</p>
+						<p>Region: {{ user.region }}</p>
+						<p>Country: {{ user.country }}</p>
+
+						<button class="btn btn-sm btn-secondary">
+							<i class="fa-solid fa-file-pen"></i>
+							Editar info
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- <pre>{{ userReviews$ | async | json }}</pre> -->
+
+	<div class="container mt-4 pb-5" *ngIf="userReviews$ | async as reviews">
+		<div class="d-flex flex-column gap-2">
+			<h2 class="text-secondary mt-5 mb-3">Reviews del usuario:</h2>
+			<div
+				class="card p-3 shadow d-flex justify-content-between"
+				*ngFor="let review of reviews"
+			>
+				<h5
+					class="lead nav-link mt-3 text-primary"
+					(click)="navigateToThisMovie(review.movieId)"
+				>
+					{{ review.movieTitle }}
+				</h5>
+				<p class="lead text-success ms-3">{{ review.rating }}</p>
+				<p class="text-lead fs-6 ms-3 me-3">
+					{{ review.comment }}
+				</p>
+
+				<div class="d-flex gap-2 align-items-center ms-2 mt-3">
+					<button
+						class="btn btn-sm btn-outlined rounded-pill"
+						(click)="navigateToThisMovie(review.movieId)"
+					>
+						<i class="fa fa-circle-arrow-right"></i>
+						Ir a la película
+					</button>
+					<p class="text-secondary">Nº Likes</p>
+					<button
+						class="btn btn-danger btn-sm rounded-pill"
+						(click)="likeReview()"
+					>
+						<i class="fa fa-heart"></i>
+					</button>
+					<p class="m-auto" style="font-size: 0.8rem">
+						{{ review.last_update | date : "dd/MM/yyyy" }}
+					</p>
+				</div>
+
+				<!-- PLANTEAMOS LOS DOS BOTONES PARA EDITAR Y ELIMINAR EL COMENTARIO -->
+				<!-- <ng-container *ngIf="user.username == userInRoute"> -->
+				<!-- <div class="d-flex gap-2 ms-2 mt-3">
+					<button
+						class="btn btn-sm btn-outlined rounded-pill"
+						(click)="NavigateToMovie(review.movieId)"
+					>
+						<fa-icon [icon]="faCircleArrowRight"></fa-icon>
+						Ir a la película
+					</button>
+					<button
+						class="btn btn-sm btn-outlined rounded-pill"
+						(click)="OpenModalEdit(review.id)"
+						data-bs-toggle="modal"
+						data-bs-target="#editModalPopUp"
+					>
+						<fa-icon [icon]="faFileEdit"></fa-icon>
+						Editar
+					</button>
+					<button
+						class="btn btn-sm btn-danger rounded-pill"
+						(click)="OpenModalDelete(review.id)"
+						data-bs-toggle="modal"
+						data-bs-target="#deleteModalPopUp"
+					>
+						<fa-icon [icon]="faSquareMinus"></fa-icon>
+						Eliminar review
+					</button>
+					<p class="reviewLastUpdateText text-secondary ms-auto me-3">
+						last update review
+					</p>
+				</div> -->
+				<!-- </ng-container> -->
+			</div>
+		</div>
+	</div>
+</div>

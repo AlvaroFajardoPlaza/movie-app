@@ -29,9 +29,9 @@ export class CommentsService {
 	}
 
 	// Recopila los comentarios de una película por su movieId >>>
-	findById(id: number): Observable<Array<Comment>> {
+	findById(movieId: number): Observable<Array<Comment>> {
 		return this._http.get<Array<Comment>>(
-			`${environment.baseUrl}/${this.prefix}/${id}`
+			`${environment.baseUrl}/${this.prefix}/${movieId}`
 		);
 	}
 
@@ -49,5 +49,16 @@ export class CommentsService {
 		return this._http.get<RatingResponse>(
 			`${environment.baseUrl}/${this.prefix}/rating/${movieId}`
 		);
+	}
+
+	// Soft delete de los comentarios
+	softDelete(reviewId: string) {
+		console.log('entramos al soft delete');
+		const result = this._http.put(
+			`${environment.baseUrl}/${this.prefix}/softdelete/${reviewId}`,
+			''
+		);
+		console.log(result);
+		return result;
 	}
 }

@@ -4,39 +4,32 @@ import { User } from 'src/app/models/user.interface';
 import { Comment } from 'src/app/models/comment.interfaze';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommentsService } from 'src/app/services/comments.service';
-import {
-	faSquareMinus,
-	faFileEdit,
-	faCircleArrowRight,
-	faBookmark
-} from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
 	selector: 'app-my-user',
 	templateUrl: './my-user.component.html',
 	styleUrls: ['./my-user.component.scss']
 })
-export class MyUserComponent implements OnInit, OnDestroy {
-	faSquareMinus = faSquareMinus;
-	faFileEdit = faFileEdit;
-	faCircleArrowRight = faCircleArrowRight;
-	faBookmark = faBookmark;
+export class MyUserComponent implements OnInit {
 	// Dentro de este componente nos vamos a traer la información del usuario, así como todos sus comentarios y la película a la que quedan relacionados
 	// Tendrá la posibilidad de modificar su información personal y sus comentarios
+	private _router = inject(Router);
+	private _activatedRoute = inject(ActivatedRoute);
 	private _authSvc = inject(AuthService);
 	private _commentsSvc = inject(CommentsService);
 	private _formbuilder = inject(FormBuilder);
 
 	user$: Observable<User> = this._authSvc.user$;
 	user: User;
+	userInRoute: string | null =
+		this._activatedRoute.snapshot.paramMap.get('username');
 
 	username: string;
-	// Lo pasamos por una pipe que le haga un map
-	userReviews$: Observable<Array<Comment>> =
-		this._commentsSvc.findByUsername('alvf');
+	reviewId: string;
 
-	// A parte de traer los comentarios, necesitamos también el nombre de cada película
+	userReviews$: Observable<Array<Comment>>;
 
 	subscription: Subscription;
 
@@ -50,6 +43,7 @@ export class MyUserComponent implements OnInit, OnDestroy {
 		{ name: '5 estrellas', value: 5 }
 	];
 
+	// Dentro del constructor crearemos los distintos forms para manejar la edición de la info
 	constructor() {
 		this.editReviewForm = this._formbuilder.group({
 			comment: [null, Validators.required],
@@ -60,15 +54,22 @@ export class MyUserComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.user$.subscribe((user) => {
 			this.user = user;
-			user.username = this.username;
 			console.log('Datos usuario: ', user);
+			this.username = user.username;
+
+			this.userReviews$ = this._commentsSvc.findByUsername(this.username);
 		});
-		// this.userComments$ = this._commentsSvc.findByUsername(this.username);
-		// console.log(this.userComments$);
+	}
+
+	// Boton de navegación a la película
+	NavigateToMovie(movieId: number) {
+		console.log('El id:', movieId);
+		return this._router.navigate(['explore-movies/', movieId]);
 	}
 
 	// Función para llamar al modal que se abrirá y nos permitirá editar los datos del comentario
-	OpenModalEdit() {
+	OpenModalEdit(reviewId: number) {
+		this.reviewId = reviewId.toString();
 		const editModal = document.getElementById('editModalPopUp');
 		if (editModal != null) {
 			console.log('Tenemos el edit modal en nuestra plantilla');
@@ -81,14 +82,26 @@ export class MyUserComponent implements OnInit, OnDestroy {
 		);
 	}
 
-	OpenModalDelete() {
+	// Funciones para abrir modal de soft delete del comentario
+	OpenModalDelete(reviewId: number) {
+		this.reviewId = reviewId.toString();
 		const deleteModal = document.getElementById('');
 		if (deleteModal != null) {
 			console.log('Tenemos el delete modal en nuestra plantilla');
 		}
 	}
 
-	ngOnDestroy(): void {
-		this.subscription.unsubscribe();
+	softDelete() {
+		// console.log('this reviewId:', this.reviewId);
+		if (this.reviewId) {
+			this._commentsSvc.softDelete(this.reviewId).subscribe(
+				() => console.log('Review soft deleteada.'),
+				(err) => console.log('Ha habido un error: ', err)
+			);
+		}
 	}
+
+	// ngOnDestroy(): void {
+	// 	this.subscription.unsubscribe();
+	// }
 }

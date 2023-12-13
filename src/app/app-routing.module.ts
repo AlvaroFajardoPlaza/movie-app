@@ -13,6 +13,7 @@ import { LoginComponent } from './components/registration/login/login.component'
 import { authPermissionGuard } from './guards/auth-permission.guard';
 import { NewMovieFormComponent } from './components/movies/movies-list/new-movie-form/new-movie-form.component';
 import { MyUserComponent } from './components/users/my-user/my-user.component';
+import { UserComponent } from './components/users/user/user.component';
 
 const routes: Routes = [
 	{ path: 'home', component: HomeComponent },
@@ -20,7 +21,12 @@ const routes: Routes = [
 	{ path: 'login', component: LoginComponent },
 	// Ruta para ver el panel del usuario y modificar sus datos
 	{
-		path: 'myUser',
+		path: 'user/:userUsername',
+		component: UserComponent,
+		canActivate: [authPermissionGuard]
+	},
+	{
+		path: 'user/mypanel/:username',
 		component: MyUserComponent,
 		canActivate: [authPermissionGuard]
 	},

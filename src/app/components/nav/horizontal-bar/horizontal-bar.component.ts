@@ -47,8 +47,8 @@ export class HorizontalBarComponent implements OnInit {
 		this._router.navigate(['login']);
 	}
 
-	navigateToMyUserPanel() {
-		this._router.navigate(['myUser']);
+	navigateToMyUserPanel(username: string) {
+		this._router.navigate(['user/mypanel/', username]);
 	}
 
 	logout() {

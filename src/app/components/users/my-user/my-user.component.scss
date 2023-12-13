@@ -1,5 +1,14 @@
+@keyframes cambioColor {
+    0% {
+      background-color: #171619; /* Color inicial (oscuro) */
+    }
+    100% {
+      background-color: #121212; /* Color final (más oscuro) */
+    }
+  }
+
 .backgroundUserProfilePage {
-    background-color: #424242;
+    animation: cambioColor 5s infinite alternate; /* Aplicar la animación al fondo del body */
 }
 
 .user-main-info-section {
@@ -17,6 +26,21 @@
     height: auto;
     width: 100%;
     border: solid 1px white;
+}
+
+@keyframes cambioColorCard {
+  0% {
+    background-color: #fdfdfd; /* Color inicial (oscuro) */
+  }
+  100% {
+    background-color: #f6f6f6; /* Color final (más oscuro) */
+  }
+}
+
+.card {
+  animation: cambioColorCard 5s infinite alternate;
+  border: solid 1px rgb(255, 255, 255);
+  box-shadow: rgba(233, 233, 233, 0.2) 0px 14px 28px, rgba(255, 255, 255, 0.18) 0px 10px 10px;
 }
 
 .reviewLastUpdateText {
